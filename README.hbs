@@ -1,0 +1,23 @@
+# bigint-mod-arith 
+
+Some extra functions to work with modular arithmetics using native JS (stage 3) implementation of BigInt.
+
+## Usage examples
+
+```javascript
+const modArith = require('bigint-mod-arith');
+
+let a = 5n;
+let b = 2n;
+let n = 19n;
+
+console.log(modArith.modPow(a, b, n)); // prints 13
+
+console.log(modArith.modInv(2n, 5n)); // prints 3
+
+console.log(modArith.modInv(3n, 5n)); // prints 2
+```
+
+{{>main}}
+
+* * *
