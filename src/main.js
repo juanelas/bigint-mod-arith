@@ -8,8 +8,8 @@
  * @returns {bigint} the absolute value of a
  */
 const abs = function (a) {
-	a = BigInt(a);
-	return (a >= 0n) ? a : -a;
+    a = BigInt(a);
+    return (a >= BigInt(0)) ? a : -a;
 };
 
 /**
@@ -21,27 +21,27 @@ const abs = function (a) {
  * @returns {bigint} The greatest common divisor of a and b
  */
 const gcd = function (a, b) {
-	a = abs(a);
-	b = abs(b);
-	let shift = 0n;
-	while (!((a | b) & 1n)) {
-		a >>= 1n;
-		b >>= 1n;
-		shift++;
-	}
-	while (!(a & 1n)) a >>= 1n;
-	do {
-		while (!(b & 1n)) b >>= 1n;
-		if (a > b) {
-			let x = a;
-			a = b;
-			b = x;
-		}
-		b -= a;
-	} while (b);
+    a = abs(a);
+    b = abs(b);
+    let shift = BigInt(0);
+    while (!((a | b) & BigInt(1))) {
+        a >>= BigInt(1);
+        b >>= BigInt(1);
+        shift++;
+    }
+    while (!(a & BigInt(1))) a >>= BigInt(1);
+    do {
+        while (!(b & BigInt(1))) b >>= BigInt(1);
+        if (a > b) {
+            let x = a;
+            a = b;
+            b = x;
+        }
+        b -= a;
+    } while (b);
 
-	// rescale
-	return a << shift;
+    // rescale
+    return a << shift;
 };
 
 /**
@@ -52,9 +52,9 @@ const gcd = function (a, b) {
  * @returns {bigint} The least common multiple of a and b
  */
 const lcm = function (a, b) {
-	a = BigInt(a);
-	b = BigInt(b);
-	return abs(a * b) / gcd(a, b);
+    a = BigInt(a);
+    b = BigInt(b);
+    return abs(a * b) / gcd(a, b);
 };
 
 /**
@@ -65,9 +65,9 @@ const lcm = function (a, b) {
  * @returns {bigint} The smallest positive representation of a in modulo n
  */
 const toZn = function (a, n) {
-	n = BigInt(n);
-	a = BigInt(a) % n;
-	return (a < 0) ? a + n : a;
+    n = BigInt(n);
+    a = BigInt(a) % n;
+    return (a < 0) ? a + n : a;
 };
 
 /**
@@ -86,30 +86,30 @@ const toZn = function (a, n) {
  * @returns {egcdReturn}
  */
 const eGcd = function (a, b) {
-	a = BigInt(a);
-	b = BigInt(b);
-	let x = 0n;
-	let y = 1n;
-	let u = 1n;
-	let v = 0n;
+    a = BigInt(a);
+    b = BigInt(b);
+    let x = BigInt(0);
+    let y = BigInt(1);
+    let u = BigInt(1);
+    let v = BigInt(0);
 
-	while (a !== 0n) {
-		let q = b / a;
-		let r = b % a;
-		let m = x - (u * q);
-		let n = y - (v * q);
-		b = a;
-		a = r;
-		x = u;
-		y = v;
-		u = m;
-		v = n;
-	}
-	return {
-		b: b,
-		x: x,
-		y: y
-	}
+    while (a !== BigInt(0)) {
+        let q = b / a;
+        let r = b % a;
+        let m = x - (u * q);
+        let n = y - (v * q);
+        b = a;
+        a = r;
+        x = u;
+        y = v;
+        u = m;
+        v = n;
+    }
+    return {
+        b: b,
+        x: x,
+        y: y
+    };
 };
 
 /**
@@ -121,12 +121,12 @@ const eGcd = function (a, b) {
  * @returns {bigint} the inverse modulo n
  */
 const modInv = function (a, n) {
-	let egcd = eGcd(a, n);
-	if (egcd.b !== 1n) {
-		return null; // modular inverse does not exist
-	} else {
-		return toZn(egcd.x, n);
-	}
+    let egcd = eGcd(a, n);
+    if (egcd.b !== BigInt(1)) {
+        return null; // modular inverse does not exist
+    } else {
+        return toZn(egcd.x, n);
+    }
 };
 
 /**
@@ -138,32 +138,32 @@ const modInv = function (a, n) {
  * @returns {bigint} a**b mod n
  */
 const modPow = function (a, b, n) {
-	// See Knuth, volume 2, section 4.6.3.
-	n = BigInt(n);
-	a = toZn(a, n);
-	b = BigInt(b);
-	if (b < 0n) {
-		return modInv(modPow(a, abs(b), n), n);
-	}
-	let result = 1n;
-	let x = a;
-	while (b > 0) {
-		var leastSignificantBit = b % 2n;
-		b = b / 2n;
-		if (leastSignificantBit == 1n) {
-			result = result * x;
-			result = result % n;
-		}
-		x = x * x;
-		x = x % n;
-	}
-	return result;
+    // See Knuth, volume 2, section 4.6.3.
+    n = BigInt(n);
+    a = toZn(a, n);
+    b = BigInt(b);
+    if (b < BigInt(0)) {
+        return modInv(modPow(a, abs(b), n), n);
+    }
+    let result = BigInt(1);
+    let x = a;
+    while (b > 0) {
+        var leastSignificantBit = b % BigInt(2);
+        b = b / BigInt(2);
+        if (leastSignificantBit == BigInt(1)) {
+            result = result * x;
+            result = result % n;
+        }
+        x = x * x;
+        x = x % n;
+    }
+    return result;
 };
 
 module.exports = {
-	abs: abs,
-	gcd: gcd,
-	lcm: lcm,
-	modInv: modInv,
-	modPow: modPow
+    abs: abs,
+    gcd: gcd,
+    lcm: lcm,
+    modInv: modInv,
+    modPow: modPow
 };
