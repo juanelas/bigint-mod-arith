@@ -28,17 +28,20 @@ For web brosers, you can also [download the bundle from GitHub](https://raw.gith
 ## Usage examples
 
 ```javascript
-const modArith = require('bigint-mod-arith');
+const bigintModArith = require('bigint-mod-arith');
 
-let a = BigInt(5); // more linter friendly
-let b = 2n; // stage 3 short syntax for BigInt
-let n = 19n;
+// Stage 3 BigInts with value 666 can be declared as BigInt('666') 
+// or the shorte no-linter-friendly new syntax 666n
 
-console.log(modArith.modPow(a, b, n)); // prints 13
-
-console.log(modArith.modInv(2n, 5n)); // prints 3
-
-console.log(modArith.modInv(3n, 5n)); // prints 2
+let a = BigInt('5'); 
+let b = BigInt('2'); 
+let n = BigInt('19');
+ 
+console.log(bigintModArith.modPow(a, b, n)); // prints 6
+ 
+console.log(bigintModArith.modInv(BigInt('2'), BigInt('5'))); // prints 3
+ 
+console.log(bigintModArith.modInv(BigInt('3'), BigInt('5'))); // prints 2
 ```
 
 # bigint-mod-arith JS Doc
