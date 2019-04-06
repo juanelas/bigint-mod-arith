@@ -18,14 +18,23 @@
     "url": "https://github.com/juanelas"
   },
   "repository": "github:juanelas/bigint-mod-arith",
-  "main": "./src/main.js",
+  "main": "./dist/bigint-mod-arith-latest.node.js",
+  "browser": "./dist/bigint-mod-arith-latest.browser.mod.js",
   "directories": {
+    "build": "./build",
+    "dist": "./dist",
     "src": "./src"
   },
   "scripts": {
-    "docs:build": "jsdoc2md --template=README.hbs --files ./src/main.js > README.md"
+    "docs:build": "jsdoc2md --template=README.hbs --files ./src/main.js > README.md",
+    "build": "node build/build.rollup.js",
+    "postinstall": "npm run build",
+    "prepublishOnly": "npm run build && npm run docs:build"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^4.0.1"
+    "jsdoc-to-markdown": "^4.0.1",
+    "rollup": "^1.9.0",
+    "rollup-plugin-babel-minify": "^8.0.0",
+    "rollup-plugin-commonjs": "^9.3.4"
   }
 }
