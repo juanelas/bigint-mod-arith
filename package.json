@@ -28,7 +28,6 @@
   "scripts": {
     "docs:build": "jsdoc2md --template=README.hbs --files ./src/main.js > README.md",
     "build": "node build/build.rollup.js",
-    "postinstall": "npm run build",
     "prepublishOnly": "npm run build && npm run docs:build"
   },
   "devDependencies": {
