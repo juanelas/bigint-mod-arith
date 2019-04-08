@@ -1,6 +1,6 @@
 # bigint-mod-arith 
 
-Some extra functions to work with modular arithmetics using native JS (stage 3) implementation of BigInt. It can be used with Node.js (starting in version 10.4.0) and [Web Browsers supporting BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility).
+Some extra functions to work with modular arithmetics using native JS (stage 3) implementation of BigInt. It can be used with Node.js (>=10.4.0) and [Web Browsers supporting BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility).
 
 If you are looking for a cryptographically secure random generator and for probale primes (generation and testing), you may be interested in [bigint-secrets](https://github.com/juanelas/bigint-secrets)
 
@@ -20,7 +20,7 @@ bigint-mod-arith can be imported to your project with `npm`:
 npm install bigint-mod-arith
 ```
 
-For web brosers, you can also [download the bundle from GitHub](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bigint-mod-arith-latest.browser.mod.min.js) or just hotlink to it:
+For web browsers, you can also [download the bundle from GitHub](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bigint-mod-arith-latest.browser.mod.min.js) or just hotlink to it:
 ```html
 <script type="module" src="https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bigint-mod-arith-latest.browser.mod.min.js"></script>
 ```
@@ -31,7 +31,7 @@ For web brosers, you can also [download the bundle from GitHub](https://raw.gith
 const bigintModArith = require('bigint-mod-arith');
 
 // Stage 3 BigInts with value 666 can be declared as BigInt('666') 
-// or the shorte no-linter-friendly new syntax 666n
+// or the shorter no-linter-friendly new syntax 666n
 
 let a = BigInt('5'); 
 let b = BigInt('2'); 
