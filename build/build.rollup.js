@@ -1,54 +1,78 @@
+'use strict';
+
 const rollup = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
 const minify = require('rollup-plugin-babel-minify');
 const fs = require('fs');
 const path = require('path');
 const pkgJson = require('../package.json');
 
+const rootDir = path.join(__dirname, '..');
+const srcDir = path.join(rootDir, 'src');
+const dstDir = path.join(rootDir, 'dist');
 
 const buildOptions = [
     { // Browser
         input: {
-            input: path.join(__dirname, '..', 'src', 'main.js'),
-            plugins: [
-                commonjs()
-            ],
+            input: path.join(srcDir, 'main.js')
         },
         output: {
-            file: path.join(__dirname, '..', 'dist', `${pkgJson.name}-${pkgJson.version}.browser.mod.js`),
-            format: 'esm'
+            file: path.join(dstDir, `${pkgJson.name}-${pkgJson.version}.browser.js`),
+            format: 'iife',
+            name: camelise(pkgJson.name)
         }
     },
     { // Browser minified
         input: {
-            input: path.join(__dirname, '..', 'src', 'main.js'),
+            input: path.join(srcDir, 'main.js'),
             plugins: [
-                commonjs(),
                 minify({
                     'comments': false
                 })
             ],
         },
         output: {
-            file: path.join(__dirname, '..', 'dist', `${pkgJson.name}-${pkgJson.version}.browser.mod.min.js`),
+            file: path.join(dstDir, `${pkgJson.name}-${pkgJson.version}.browser.min.js`),
+            format: 'iife',
+            name: camelise(pkgJson.name)
+        }
+    },
+    { // Browser esm
+        input: {
+            input: path.join(srcDir, 'main.js')
+        },
+        output: {
+            file: path.join(dstDir, `${pkgJson.name}-${pkgJson.version}.browser.mod.js`),
+            format: 'esm'
+        }
+    },
+    { // Browser esm minified
+        input: {
+            input: path.join(srcDir, 'main.js'),
+            plugins: [
+                minify({
+                    'comments': false
+                })
+            ],
+        },
+        output: {
+            file: path.join(dstDir, `${pkgJson.name}-${pkgJson.version}.browser.mod.min.js`),
             format: 'esm'
         }
     },
     { // Node
         input: {
-            input: path.join(__dirname, '..', 'src', 'main.js'),
+            input: path.join(srcDir, 'main.js'),
         },
         output: {
-            file: path.join(__dirname, '..', 'dist', `${pkgJson.name}-${pkgJson.version}.node.js`),
+            file: path.join(dstDir, `${pkgJson.name}-${pkgJson.version}.node.js`),
             format: 'cjs'
         }
-    },
+    }
 ];
 
 for (const options of buildOptions) {
     build(options);
 }
-
 
 
 /* --- HELPLER FUNCTIONS --- */
@@ -68,4 +92,11 @@ async function build(options) {
         options.output.file,
         options.output.file.replace(`${pkgJson.name}-${pkgJson.version}.`, `${pkgJson.name}-latest.`)
     );
+}
+
+function camelise(str) {
+    return str.replace(/-([a-z])/g,
+        function (m, w) {
+            return w.toUpperCase();
+        });
 }

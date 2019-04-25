@@ -8,7 +8,9 @@
     "lcm",
     "gcd",
     "egcd",
+    "modinv",
     "modular inverse",
+    "modpow",
     "modular exponentiation"
   ],
   "license": "MIT",
@@ -26,13 +28,14 @@
     "src": "./src"
   },
   "scripts": {
-    "docs:build": "jsdoc2md --template=README.hbs --files ./src/main.js > README.md",
     "build": "node build/build.rollup.js",
-    "prepublishOnly": "npm run build && npm run docs:build"
+    "build:docs": "jsdoc2md --template=README.hbs --files ./src/main.js > README.md",
+    "build:all": "npm run build && npm run build:docs",
+    "prepublishOnly": "npm run build && npm run build:docs"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^4.0.1",
-    "rollup": "^1.9.0",
+    "rollup": "^1.10.1",
     "rollup-plugin-babel-minify": "^8.0.0",
     "rollup-plugin-commonjs": "^9.3.4"
   }
