@@ -25,18 +25,18 @@ Import your module as :
 
  - Node.js
    ```javascript
-   const bigintCryptoUtils = require('bigint-mod-arith')
+   const bigintModArith = require('bigint-mod-arith')
    ... // your code here
    ```
  - JavaScript native project
    ```javascript
-   import * as bigintCryptoUtils from 'bigint-mod-arith'
+   import * as bigintModArith from 'bigint-mod-arith'
    ... // your code here
    ```
- - Javascript native browser ES6 mod
+ - JavaScript native browser ES6 mod
    ```html
    <script type="module">
-      import * as bigintCryptoUtils from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
+      import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
       ... // your code here
     </script>
    import as bcu from 'bigint-mod-arith'
@@ -50,7 +50,7 @@ Import your module as :
    </script>
  - TypeScript
    ```typescript
-   import * as bigintCryptoUtils from 'bigint-mod-arith'
+   import * as bigintModArith from 'bigint-mod-arith'
    ... // your code here
    ```
    > BigInt is [ES-2020](https://tc39.es/ecma262/#sec-bigint-objects). In order to use it with TypeScript you should set `lib` (and probably also `target` and `module`) to `esnext` in `tsconfig.json`.
@@ -66,11 +66,11 @@ const a = BigInt('5')
 const b = BigInt('2')
 const n = BigInt('19')
 
-console.log(bigintCryptoUtils.modPow(a, b, n)) // prints 6
+console.log(bigintModArith.modPow(a, b, n)) // prints 6
 
-console.log(bigintCryptoUtils.modInv(BigInt('2'), BigInt('5'))) // prints 3
+console.log(bigintModArith.modInv(BigInt('2'), BigInt('5'))) // prints 3
 
-console.log(bigintCryptoUtils.modInv(BigInt('3'), BigInt('5'))) // prints 2
+console.log(bigintModArith.modInv(BigInt('3'), BigInt('5'))) // prints 2
 
 ```
 
