@@ -1,16 +1,19 @@
+# Build scripts
+build/*
+
+# Source files
+src/*
+
+# Test files
+test/*
+
 # Logs
 logs
 *.log
 npm-debug.log*
-
-# Dependency directories
-node_modules/
 
 # Output of 'npm pack'
 *.tgz
 
 # Visual Studio Code
 .vscode
-
-# IntelliJ
-.idea/
