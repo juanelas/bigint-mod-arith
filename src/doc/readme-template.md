@@ -36,11 +36,9 @@ Import your module as :
  - JavaScript native browser ES6 mod
    ```html
    <script type="module">
-      import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
-      ... // your code here
-    </script>
-   import as bcu from 'bigint-mod-arith'
-   ... // your code here
+     import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
+     ... // your code here
+   </script>
    ```
  - JavaScript native browser IIFE
    ```html
