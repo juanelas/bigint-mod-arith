@@ -61,8 +61,8 @@ module.exports = [
         browser: true
       }),
       terser({
-        mangle: false,
-        compress: false
+        // mangle: false,
+        // compress: false
       })
     ]
   },

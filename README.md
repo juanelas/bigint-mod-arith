@@ -36,13 +36,13 @@ Import your module as :
  - JavaScript native browser ES6 mod
    ```html
    <script type="module">
-     import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
+     import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the browser mod bundle
      ... // your code here
    </script>
    ```
  - JavaScript native browser IIFE
    ```html
-   <script src="../../lib/index.browser.bundle.js"></script>
+   <script src="../../lib/index.browser.bundle.js"></script> <!-- Use you actual path to the browser bundle -->
    <script>
      ... // your code here
    </script>
@@ -55,18 +55,18 @@ Import your module as :
 
 ```javascript
 /* Stage 3 BigInts with value 666 can be declared as BigInt('666')
-or the shorter new no-so-linter-friendly syntax 666n.
+or the shorter syntax 666n.
 Notice that you can also pass a number, e.g. BigInt(666), but it is not
 recommended since values over 2**53 - 1 won't be safe but no warning will
 be raised.
 */
 const a = BigInt('5')
 const b = BigInt('2')
-const n = BigInt('19')
+const n = 19n
 
 console.log(bigintModArith.modPow(a, b, n)) // prints 6
 
-console.log(bigintModArith.modInv(BigInt('2'), BigInt('5'))) // prints 3
+console.log(bigintModArith.modInv(2n, 5n)) // prints 3
 
 console.log(bigintModArith.modInv(BigInt('3'), BigInt('5'))) // prints 2
 

@@ -35,7 +35,7 @@
     "build:js": "rollup -c build/rollup.config.js",
     "build:standard": "standard --fix",
     "build:browserTests": "rollup -c build/rollup.tests.config.js",
-    "build:docs": "jsdoc2md --template=./src/doc/readme-template.md --files ./lib/index.browser.mod.js -d 3 -g none > README.md",
+    "build:docs": "node build/build.docs.js",
     "build:dts": "node build/build.dts.js",
     "build": "run-s build:**",
     "prepublishOnly": "npm run build"
