@@ -46,6 +46,7 @@ Import your module as :
    <script>
      ... // your code here
    </script>
+   ```
  - TypeScript
    ```typescript
    import * as bigintModArith from 'bigint-mod-arith'
