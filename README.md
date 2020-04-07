@@ -72,7 +72,7 @@ console.log(bigintModArith.modInv(BigInt('3'), BigInt('5'))) // prints 2
 
 ```
 
-## JS Doc
+## API reference documentation
 
 <a name="abs"></a>
 
