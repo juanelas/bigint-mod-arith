@@ -17,7 +17,7 @@ npm install bigint-mod-arith
 ```
 NPM installation defaults to the ES6 module for browsers and the CJS one for Node.js.
 
-For web browsers, you can also directly download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.js) or the [ES6 bundle module](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.mod.js) from GitHub.
+For web browsers, you can also directly download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.iife.js) or the [ES6 bundle module](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.mod.js) from GitHub.
 
 ## Usage example
 
@@ -28,17 +28,18 @@ Import your module as :
    const bigintModArith = require('bigint-mod-arith')
    ... // your code here
    ```
- - JavaScript native project
+ - JavaScript native or TypeScript project
    ```javascript
    import * as bigintModArith from 'bigint-mod-arith'
    ... // your code here
    ```
+   > BigInt is [ES-2020](https://tc39.es/ecma262/#sec-bigint-objects). In order to use it with TypeScript you should set `lib` (and probably also `target` and `module`) to `esnext` in `tsconfig.json`.
  - JavaScript native browser ES6 mod
    ```html
    <script type="module">
-     import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the browser mod bundle
-     ... // your code here
-   </script>
+      import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
+      ... // your code here
+    </script>
    ```
  - JavaScript native browser IIFE
    ```html
@@ -46,12 +47,9 @@ Import your module as :
    <script>
      ... // your code here
    </script>
- - TypeScript
-   ```typescript
-   import * as bigintModArith from 'bigint-mod-arith'
-   ... // your code here
    ```
-   > BigInt is [ES-2020](https://tc39.es/ecma262/#sec-bigint-objects). In order to use it with TypeScript you should set `lib` (and probably also `target` and `module`) to `esnext` in `tsconfig.json`.
+
+And you could use it like in the following:
 
 ```javascript
 /* Stage 3 BigInts with value 666 can be declared as BigInt('666')
@@ -74,50 +72,69 @@ console.log(bigintModArith.modInv(BigInt('3'), BigInt('5'))) // prints 2
 
 ## API reference documentation
 
-<a name="abs"></a>
+<a name="module_bigint-mod-arith"></a>
 
-### abs(a) ⇒ <code>bigint</code>
+### bigint-mod-arith
+Some common functions for modular arithmetic using native JS implementation of BigInt
+
+
+* [bigint-mod-arith](#module_bigint-mod-arith)
+    * [~abs(a)](#module_bigint-mod-arith..abs) ⇒ <code>bigint</code>
+    * [~bitLength(a)](#module_bigint-mod-arith..bitLength) ⇒ <code>number</code>
+    * [~eGcd(a, b)](#module_bigint-mod-arith..eGcd) ⇒ <code>egcdReturn</code>
+    * [~gcd(a, b)](#module_bigint-mod-arith..gcd) ⇒ <code>bigint</code>
+    * [~lcm(a, b)](#module_bigint-mod-arith..lcm) ⇒ <code>bigint</code>
+    * [~max(a, b)](#module_bigint-mod-arith..max) ⇒ <code>bigint</code>
+    * [~min(a, b)](#module_bigint-mod-arith..min) ⇒ <code>bigint</code>
+    * [~modInv(a, n)](#module_bigint-mod-arith..modInv) ⇒ <code>bigint</code>
+    * [~modPow(b, e, n)](#module_bigint-mod-arith..modPow) ⇒ <code>bigint</code>
+    * [~toZn(a, n)](#module_bigint-mod-arith..toZn) ⇒ <code>bigint</code>
+    * [~egcdReturn](#module_bigint-mod-arith..egcdReturn) : <code>Object</code>
+
+<a name="module_bigint-mod-arith..abs"></a>
+
+#### bigint-mod-arith~abs(a) ⇒ <code>bigint</code>
 Absolute value. abs(a)==a if a>=0. abs(a)==-a if a<0
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - the absolute value of a  
 
 | Param | Type |
 | --- | --- |
 | a | <code>number</code> \| <code>bigint</code> | 
 
-<a name="bitLength"></a>
+<a name="module_bigint-mod-arith..bitLength"></a>
 
-### bitLength(a) ⇒ <code>number</code>
+#### bigint-mod-arith~bitLength(a) ⇒ <code>number</code>
 Returns the bitlength of a number
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>number</code> - - the bit length  
 
 | Param | Type |
 | --- | --- |
 | a | <code>number</code> \| <code>bigint</code> | 
 
-<a name="eGcd"></a>
+<a name="module_bigint-mod-arith..eGcd"></a>
 
-### eGcd(a, b) ⇒ [<code>egcdReturn</code>](#egcdReturn)
+#### bigint-mod-arith~eGcd(a, b) ⇒ <code>egcdReturn</code>
 An iterative implementation of the extended euclidean algorithm or extended greatest common divisor algorithm.
 Take positive integers a, b as input, and return a triple (g, x, y), such that ax + by = g = gcd(a, b).
 
-**Kind**: global function  
-**Returns**: [<code>egcdReturn</code>](#egcdReturn) - A triple (g, x, y), such that ax + by = g = gcd(a, b).  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
+**Returns**: <code>egcdReturn</code> - A triple (g, x, y), such that ax + by = g = gcd(a, b).  
 
 | Param | Type |
 | --- | --- |
 | a | <code>number</code> \| <code>bigint</code> | 
 | b | <code>number</code> \| <code>bigint</code> | 
 
-<a name="gcd"></a>
+<a name="module_bigint-mod-arith..gcd"></a>
 
-### gcd(a, b) ⇒ <code>bigint</code>
+#### bigint-mod-arith~gcd(a, b) ⇒ <code>bigint</code>
 Greatest-common divisor of two integers based on the iterative binary algorithm.
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - The greatest common divisor of a and b  
 
 | Param | Type |
@@ -125,12 +142,12 @@ Greatest-common divisor of two integers based on the iterative binary algorithm.
 | a | <code>number</code> \| <code>bigint</code> | 
 | b | <code>number</code> \| <code>bigint</code> | 
 
-<a name="lcm"></a>
+<a name="module_bigint-mod-arith..lcm"></a>
 
-### lcm(a, b) ⇒ <code>bigint</code>
+#### bigint-mod-arith~lcm(a, b) ⇒ <code>bigint</code>
 The least common multiple computed as abs(a*b)/gcd(a,b)
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - The least common multiple of a and b  
 
 | Param | Type |
@@ -138,12 +155,12 @@ The least common multiple computed as abs(a*b)/gcd(a,b)
 | a | <code>number</code> \| <code>bigint</code> | 
 | b | <code>number</code> \| <code>bigint</code> | 
 
-<a name="max"></a>
+<a name="module_bigint-mod-arith..max"></a>
 
-### max(a, b) ⇒ <code>bigint</code>
+#### bigint-mod-arith~max(a, b) ⇒ <code>bigint</code>
 Maximum. max(a,b)==a if a>=b. max(a,b)==b if a<=b
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - maximum of numbers a and b  
 
 | Param | Type |
@@ -151,12 +168,12 @@ Maximum. max(a,b)==a if a>=b. max(a,b)==b if a<=b
 | a | <code>number</code> \| <code>bigint</code> | 
 | b | <code>number</code> \| <code>bigint</code> | 
 
-<a name="min"></a>
+<a name="module_bigint-mod-arith..min"></a>
 
-### min(a, b) ⇒ <code>bigint</code>
+#### bigint-mod-arith~min(a, b) ⇒ <code>bigint</code>
 Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<=b
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - minimum of numbers a and b  
 
 | Param | Type |
@@ -164,12 +181,12 @@ Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<=b
 | a | <code>number</code> \| <code>bigint</code> | 
 | b | <code>number</code> \| <code>bigint</code> | 
 
-<a name="modInv"></a>
+<a name="module_bigint-mod-arith..modInv"></a>
 
-### modInv(a, n) ⇒ <code>bigint</code>
+#### bigint-mod-arith~modInv(a, n) ⇒ <code>bigint</code>
 Modular inverse.
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - the inverse modulo n or NaN if it does not exist  
 
 | Param | Type | Description |
@@ -177,12 +194,12 @@ Modular inverse.
 | a | <code>number</code> \| <code>bigint</code> | The number to find an inverse for |
 | n | <code>number</code> \| <code>bigint</code> | The modulo |
 
-<a name="modPow"></a>
+<a name="module_bigint-mod-arith..modPow"></a>
 
-### modPow(b, e, n) ⇒ <code>bigint</code>
+#### bigint-mod-arith~modPow(b, e, n) ⇒ <code>bigint</code>
 Modular exponentiation b**e mod n. Currently using the right-to-left binary method
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - b**e mod n  
 
 | Param | Type | Description |
@@ -191,12 +208,12 @@ Modular exponentiation b**e mod n. Currently using the right-to-left binary meth
 | e | <code>number</code> \| <code>bigint</code> | exponent |
 | n | <code>number</code> \| <code>bigint</code> | modulo |
 
-<a name="toZn"></a>
+<a name="module_bigint-mod-arith..toZn"></a>
 
-### toZn(a, n) ⇒ <code>bigint</code>
+#### bigint-mod-arith~toZn(a, n) ⇒ <code>bigint</code>
 Finds the smallest positive element that is congruent to a in modulo n
 
-**Kind**: global function  
+**Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>bigint</code> - The smallest positive representation of a in modulo n  
 
 | Param | Type | Description |
@@ -204,12 +221,12 @@ Finds the smallest positive element that is congruent to a in modulo n
 | a | <code>number</code> \| <code>bigint</code> | An integer |
 | n | <code>number</code> \| <code>bigint</code> | The modulo |
 
-<a name="egcdReturn"></a>
+<a name="module_bigint-mod-arith..egcdReturn"></a>
 
-### egcdReturn : <code>Object</code>
+#### bigint-mod-arith~egcdReturn : <code>Object</code>
 A triple (g, x, y), such that ax + by = g = gcd(a, b).
 
-**Kind**: global typedef  
+**Kind**: inner typedef of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Properties**
 
 | Name | Type |

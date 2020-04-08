@@ -7,6 +7,10 @@ export type egcdReturn = {
     y: bigint;
 };
 /**
+ * Some common functions for modular arithmetic using native JS implementation of BigInt
+ * @module bigint-mod-arith
+ */
+/**
  * Absolute value. abs(a)==a if a>=0. abs(a)==-a if a<0
  *
  * @param {number|bigint} a

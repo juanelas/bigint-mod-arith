@@ -17,7 +17,7 @@ npm install bigint-mod-arith
 ```
 NPM installation defaults to the ES6 module for browsers and the CJS one for Node.js.
 
-For web browsers, you can also directly download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.js) or the [ES6 bundle module](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.mod.js) from GitHub.
+For web browsers, you can also directly download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.iife.js) or the [ES6 bundle module](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.mod.js) from GitHub.
 
 ## Usage example
 
@@ -25,20 +25,21 @@ Import your module as :
 
  - Node.js
    ```javascript
-   const bigintModArith = require('bigint-mod-arith')
+   const {{PKG_CAMELCASE}} = require('{{PKG_NAME}}')
    ... // your code here
    ```
- - JavaScript native project
+ - JavaScript native or TypeScript project
    ```javascript
-   import * as bigintModArith from 'bigint-mod-arith'
+   import * as {{PKG_CAMELCASE}} from '{{PKG_NAME}}'
    ... // your code here
    ```
+   > BigInt is [ES-2020](https://tc39.es/ecma262/#sec-bigint-objects). In order to use it with TypeScript you should set `lib` (and probably also `target` and `module`) to `esnext` in `tsconfig.json`.
  - JavaScript native browser ES6 mod
    ```html
    <script type="module">
-     import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the browser mod bundle
-     ... // your code here
-   </script>
+      import * as {{PKG_CAMELCASE}} from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
+      ... // your code here
+    </script>
    ```
  - JavaScript native browser IIFE
    ```html
@@ -47,12 +48,8 @@ Import your module as :
      ... // your code here
    </script>
    ```
- - TypeScript
-   ```typescript
-   import * as bigintModArith from 'bigint-mod-arith'
-   ... // your code here
-   ```
-   > BigInt is [ES-2020](https://tc39.es/ecma262/#sec-bigint-objects). In order to use it with TypeScript you should set `lib` (and probably also `target` and `module`) to `esnext` in `tsconfig.json`.
+
+And you could use it like in the following:
 
 ```javascript
 /* Stage 3 BigInts with value 666 can be declared as BigInt('666')
