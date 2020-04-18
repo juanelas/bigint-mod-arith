@@ -10,6 +10,18 @@ const inputs = [
   {
     a: BigInt(4),
     b: BigInt(-1),
+    n: BigInt(0),
+    modPow: NaN
+  },
+  {
+    a: BigInt(4),
+    b: BigInt(-1),
+    n: BigInt(1),
+    modPow: BigInt(0)
+  },
+  {
+    a: BigInt(4),
+    b: BigInt(-1),
     n: BigInt(19),
     modPow: BigInt(5)
   },
@@ -39,7 +51,7 @@ describe('modPow', function () {
     describe(`modPow(${input.a}, ${input.b}, ${input.n})`, function () {
       it(`should return ${input.modPow}`, function () {
         const ret = _pkg.modPow(input.a, input.b, input.n)
-        chai.expect(ret).to.equal(input.modPow)
+        chai.expect(String(ret)).to.equal(String(input.modPow))
       })
     })
   }

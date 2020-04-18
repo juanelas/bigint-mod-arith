@@ -14,12 +14,40 @@ function camelise (str) {
     })
 }
 
+function getRepositoryData () {
+  if (typeof pkgJson.repository === 'string') {
+    const repodata = pkgJson.repository.split(/[:/]/)
+    const repoProvider = repodata[0]
+    if (repoProvider === 'github' || repoProvider === 'gitlab' || repoProvider === 'bitbucket') {
+      return {
+        repoProvider,
+        repoUsername: repodata[1],
+        repoName: repodata[2]
+      }
+    } else return null
+  }
+}
+
+const { repoProvider, repoUsername, repoName } = getRepositoryData() || { repoProvider: null, repoUsername: null, repoName: null }
+
+let iifeBundle, esmBundle, workflowBadget, coverallsBadge
+if (repoProvider && repoProvider === 'github') {
+  iifeBundle = `[IIFE bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/lib/index.browser.bundle.iife.js)`
+  esmBundle = `[ESM bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/lib/index.browser.bundle.mod.js)`
+  workflowBadget = `![Node CI](https://github.com/${repoUsername}/${repoName}/workflows/Node%20CI/badge.svg)`
+  coverallsBadge = `[![Coverage Status](https://coveralls.io/repos/github/${repoUsername}/${repoName}/badge.svg?branch=master)](https://coveralls.io/github/${repoUsername}/${repoName}?branch=master)`
+}
+
 const templateFile = path.join(rootDir, pkgJson.directories.src, 'doc', 'readme-template.md')
-const template = fs.readFileSync(templateFile, { encoding: 'UTF-8' })
+let template = fs.readFileSync(templateFile, { encoding: 'UTF-8' })
   .replace(/\{\{PKG_NAME\}\}/g, pkgJson.name)
   .replace(/\{\{PKG_CAMELCASE\}\}/g, camelise(pkgJson.name))
-  .replace(/\{\{IIFE_BUNDLE\}\}/g, 'IIFE bundle')
-  .replace(/\{\{ESM_BUNDLE\}\}/g, 'ES6 bundle module')
+  .replace(/\{\{IIFE_BUNDLE\}\}/g, iifeBundle || 'IIFE bundle')
+  .replace(/\{\{ESM_BUNDLE\}\}/g, esmBundle || 'ESM bundle')
+
+if (repoProvider && repoProvider === 'github') {
+  template = template.replace(/\{\{GITHUB_ACTIONS_BADGES\}\}/g, workflowBadget + '\n' + coverallsBadge)
+}
 
 const input = path.join(rootDir, pkgJson.browser)
 // Let us replace bigint literals by standard numbers to avoid issues with bigint

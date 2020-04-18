@@ -82,9 +82,9 @@ export function min(a: number | bigint, b: number | bigint): bigint;
  * @param {number|bigint} a The number to find an inverse for
  * @param {number|bigint} n The modulo
  *
- * @returns {bigint} the inverse modulo n or NaN if it does not exist
+ * @returns {bigint|NaN} the inverse modulo n or NaN if it does not exist
  */
-export function modInv(a: number | bigint, n: number | bigint): bigint;
+export function modInv(a: number | bigint, n: number | bigint): number | bigint;
 /**
  * Modular exponentiation b**e mod n. Currently using the right-to-left binary method
  *

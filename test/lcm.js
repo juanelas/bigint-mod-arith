@@ -8,6 +8,11 @@ const chai = require('chai')
 
 const inputs = [
   {
+    a: BigInt(0),
+    b: BigInt(0),
+    lcm: BigInt(0)
+  },
+  {
     a: BigInt(1),
     b: BigInt(1),
     lcm: BigInt(1)

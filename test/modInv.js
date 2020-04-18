@@ -26,6 +26,16 @@ const inputs = [
     a: BigInt(2),
     n: BigInt(4),
     modInv: NaN
+  },
+  {
+    a: BigInt(0),
+    n: BigInt(0),
+    modInv: NaN
+  },
+  {
+    a: BigInt(0),
+    n: BigInt(37),
+    modInv: NaN
   }
 ]
 

@@ -49,7 +49,7 @@ export function bitLength (a) {
 export function eGcd (a, b) {
   a = BigInt(a)
   b = BigInt(b)
-  if (a <= 0n | b <= 0n) { return NaN } // a and b MUST be positive
+  if (a <= 0n | b <= 0n) throw new RangeError('a and b MUST be > 0') // a and b MUST be positive
 
   let x = 0n
   let y = 1n
@@ -69,7 +69,7 @@ export function eGcd (a, b) {
     v = n
   }
   return {
-    b: b,
+    g: b,
     x: x,
     y: y
   }
@@ -119,7 +119,7 @@ export function gcd (a, b) {
 export function lcm (a, b) {
   a = BigInt(a)
   b = BigInt(b)
-  if (a === 0n && b === 0n) { return 0n }
+  if (a === 0n && b === 0n) return BigInt(0)
   return abs(a * b) / gcd(a, b)
 }
 
@@ -157,14 +157,18 @@ export function min (a, b) {
  * @param {number|bigint} a The number to find an inverse for
  * @param {number|bigint} n The modulo
  *
- * @returns {bigint} the inverse modulo n or NaN if it does not exist
+ * @returns {bigint|NaN} the inverse modulo n or NaN if it does not exist
  */
 export function modInv (a, n) {
-  const egcd = eGcd(toZn(a, n), n)
-  if (egcd.b !== 1n) {
-    return NaN // modular inverse does not exist
-  } else {
-    return toZn(egcd.x, n)
+  try {
+    const egcd = eGcd(toZn(a, n), n)
+    if (egcd.g !== 1n) {
+      return NaN // modular inverse does not exist
+    } else {
+      return toZn(egcd.x, n)
+    }
+  } catch (error) {
+    return NaN
   }
 }
 
@@ -179,7 +183,7 @@ export function modInv (a, n) {
  */
 export function modPow (b, e, n) {
   n = BigInt(n)
-  if (n === 0n) { return NaN } else if (n === 1n) { return 0n }
+  if (n === 0n) { return NaN } else if (n === 1n) { return BigInt(0) }
 
   b = toZn(b, n)
 

@@ -1,6 +1,8 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+{{GITHUB_ACTIONS_BADGES}}
 
-# bigint-mod-arith
+# {{PKG_NAME}}
 
 Some extra functions to work with modular arithmetic using native JS ([ES-2020](https://tc39.es/ecma262/#sec-bigint-objects)) implementation of BigInt. It can be used by any [Web Browser or webview supporting BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) and with Node.js (>=10.4.0).
 
@@ -8,16 +10,16 @@ Some extra functions to work with modular arithmetic using native JS ([ES-2020](
 
 ## Installation
 
-bigint-mod-arith is distributed for [web browsers and/or webviews supporting BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) as an ES6 module or an IIFE file; and for Node.js (>=10.4.0), as a CJS module.
+{{PKG_NAME}} is distributed for [web browsers and/or webviews supporting BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) as an ES6 module or an IIFE file; and for Node.js (>=10.4.0), as a CJS module.
 
-bigint-mod-arith can be imported to your project with `npm`:
+{{PKG_NAME}} can be imported to your project with `npm`:
 
 ```bash
-npm install bigint-mod-arith
+npm install {{PKG_NAME}}
 ```
-NPM installation defaults to the ES6 module for browsers and the CJS one for Node.js.
 
-For web browsers, you can also directly download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.iife.js) or the [ES6 bundle module](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.mod.js) from GitHub.
+NPM installation defaults to the ES6 module for browsers and the CJS one for Node.js. For web browsers, you can also directly download the {{IIFE_BUNDLE}} or the {{ESM_BUNDLE}} from the repository.
+
 
 ## Usage example
 
@@ -28,7 +30,7 @@ Import your module as :
    const {{PKG_CAMELCASE}} = require('{{PKG_NAME}}')
    ... // your code here
    ```
- - JavaScript native or TypeScript project
+ - JavaScript native or TypeScript project (including Angular and React)
    ```javascript
    import * as {{PKG_CAMELCASE}} from '{{PKG_NAME}}'
    ... // your code here

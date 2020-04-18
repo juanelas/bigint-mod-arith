@@ -1,4 +1,7 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+![Node CI](https://github.com/juanelas/bigint-mod-arith/workflows/Node%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/juanelas/bigint-mod-arith/badge.svg?branch=master)](https://coveralls.io/github/juanelas/bigint-mod-arith?branch=master)
 
 # bigint-mod-arith
 
@@ -15,9 +18,9 @@ bigint-mod-arith can be imported to your project with `npm`:
 ```bash
 npm install bigint-mod-arith
 ```
-NPM installation defaults to the ES6 module for browsers and the CJS one for Node.js.
 
-For web browsers, you can also directly download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.iife.js) or the [ES6 bundle module](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.mod.js) from GitHub.
+NPM installation defaults to the ES6 module for browsers and the CJS one for Node.js. For web browsers, you can also directly download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.iife.js) or the [ESM bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/lib/index.browser.bundle.mod.js) from the repository.
+
 
 ## Usage example
 
@@ -28,7 +31,7 @@ Import your module as :
    const bigintModArith = require('bigint-mod-arith')
    ... // your code here
    ```
- - JavaScript native or TypeScript project
+ - JavaScript native or TypeScript project (including Angular and React)
    ```javascript
    import * as bigintModArith from 'bigint-mod-arith'
    ... // your code here
@@ -86,7 +89,7 @@ Some common functions for modular arithmetic using native JS implementation of B
     * [~lcm(a, b)](#module_bigint-mod-arith..lcm) ⇒ <code>bigint</code>
     * [~max(a, b)](#module_bigint-mod-arith..max) ⇒ <code>bigint</code>
     * [~min(a, b)](#module_bigint-mod-arith..min) ⇒ <code>bigint</code>
-    * [~modInv(a, n)](#module_bigint-mod-arith..modInv) ⇒ <code>bigint</code>
+    * [~modInv(a, n)](#module_bigint-mod-arith..modInv) ⇒ <code>bigint</code> \| <code>NaN</code>
     * [~modPow(b, e, n)](#module_bigint-mod-arith..modPow) ⇒ <code>bigint</code>
     * [~toZn(a, n)](#module_bigint-mod-arith..toZn) ⇒ <code>bigint</code>
     * [~egcdReturn](#module_bigint-mod-arith..egcdReturn) : <code>Object</code>
@@ -183,11 +186,11 @@ Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<=b
 
 <a name="module_bigint-mod-arith..modInv"></a>
 
-#### bigint-mod-arith~modInv(a, n) ⇒ <code>bigint</code>
+#### bigint-mod-arith~modInv(a, n) ⇒ <code>bigint</code> \| <code>NaN</code>
 Modular inverse.
 
 **Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
-**Returns**: <code>bigint</code> - the inverse modulo n or NaN if it does not exist  
+**Returns**: <code>bigint</code> \| <code>NaN</code> - the inverse modulo n or NaN if it does not exist  
 
 | Param | Type | Description |
 | --- | --- | --- |
