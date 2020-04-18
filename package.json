@@ -30,6 +30,9 @@
     "test": "./test",
     "types": "./types"
   },
+  "engines": {
+    "node": ">=10.4.0"
+  },
   "scripts": {
     "test": "nyc --check-coverage mocha",
     "coverage": "nyc report --reporter=lcov",
