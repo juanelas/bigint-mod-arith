@@ -1,6 +1,6 @@
 {
   "name": "bigint-mod-arith",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Some common functions for modular arithmetic using native JS implementation of BigInt",
   "keywords": [
     "modular arithmetics",
