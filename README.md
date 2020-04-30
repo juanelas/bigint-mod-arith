@@ -31,13 +31,12 @@ Import your module as :
    const bigintModArith = require('bigint-mod-arith')
    ... // your code here
    ```
- - JavaScript native or TypeScript project (including Angular and React)
+ - JavaScript native or TypeScript project (including React and Angular)
    ```javascript
    import * as bigintModArith from 'bigint-mod-arith'
    ... // your code here
    ```
-   > BigInt is [ES-2020](https://tc39.es/ecma262/#sec-bigint-objects). In order to use it with TypeScript you should set `lib` (and probably also `target` and `module`) to `esnext` in `tsconfig.json`.
- - JavaScript native browser ES6 mod
+ - JavaScript native browser ES module
    ```html
    <script type="module">
       import * as bigintModArith from 'lib/index.browser.bundle.mod.js'  // Use you actual path to the broser mod bundle
@@ -46,13 +45,19 @@ Import your module as :
    ```
  - JavaScript native browser IIFE
    ```html
-   <script src="../../lib/index.browser.bundle.js"></script> <!-- Use you actual path to the browser bundle -->
-   <script>
-     ... // your code here
-   </script>
+   <head>
+     ...
+     <script src="../../lib/index.browser.bundle.iife.js"></script> <!-- Use you actual path to the browser bundle -->
+   </head>
+   <body>
+     ...
+     <script>
+       ... // your code here
+     </script>
+   </body>
    ```
 
-And you could use it like in the following:
+An example of usage could be:
 
 ```javascript
 /* Stage 3 BigInts with value 666 can be declared as BigInt('666')
