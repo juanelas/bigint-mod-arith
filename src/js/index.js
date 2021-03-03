@@ -10,9 +10,9 @@
  *
  * @returns {bigint} the absolute value of a
  */
-export function abs (a) {
-  a = BigInt(a)
-  return (a >= 0n) ? a : -a
+export function abs(a) {
+  if(value < 0) return -value
+  return value
 }
 
 /**
@@ -21,13 +21,15 @@ export function abs (a) {
  * @param {number|bigint} a
  * @returns {number} - the bit length
  */
-export function bitLength (a) {
+export function bitLength(a) {
+  if(a == 1) return 1
   a = BigInt(a)
-  if (a === 1n) { return 1 }
+  
   let bits = 1
   do {
     bits++
-  } while ((a >>= 1n) > 1n)
+  } while((a >>= 1n) > 1n)
+
   return bits
 }
 
@@ -46,21 +48,22 @@ export function bitLength (a) {
  *
  * @returns {egcdReturn} A triple (g, x, y), such that ax + by = g = gcd(a, b).
  */
-export function eGcd (a, b) {
+export function eGcd(a, b) {
+  if(a <= 0 | b <= 0) throw new RangeError('a and b MUST be > 0') // a and b MUST be positive
+
   a = BigInt(a)
   b = BigInt(b)
-  if (a <= 0n | b <= 0n) throw new RangeError('a and b MUST be > 0') // a and b MUST be positive
-
+  
   let x = 0n
   let y = 1n
   let u = 1n
   let v = 0n
 
-  while (a !== 0n) {
+  while(a !== 0n) {
     const q = b / a
     const r = b % a
-    const m = x - (u * q)
-    const n = y - (v * q)
+    const m = x - u * q
+    const n = y - v * q
     b = a
     a = r
     x = u
@@ -88,20 +91,20 @@ export function gcd(a, b) {
   if(b == 0) return a
   
   if(a < 0) a = -a
-	if(b < 0) b = -b
+  if(b < 0) b = -b
 
-	if(b > a) {
-		let t = a
-		a = b
-		b = t
-	}
+  if(b > a) {
+    let t = a
+    a = b
+    b = t
+  }
 
-	while(true) {
-		if(b == 0) return a
-		a %= b
-		if(a == 0) return b
-		b %= a
-	}
+  while(true) {
+    if(b == 0) return a
+    a %= b
+    if(a == 0) return b
+    b %= a
+  }
 }
 
 /**
@@ -111,10 +114,10 @@ export function gcd(a, b) {
  *
  * @returns {bigint} The least common multiple of a and b
  */
-export function lcm (a, b) {
+export function lcm(a, b) {
+  if (a == 0 && b == 0n) return 0n
   a = BigInt(a)
   b = BigInt(b)
-  if (a === 0n && b === 0n) return BigInt(0)
   return abs(a * b) / gcd(a, b)
 }
 
@@ -126,10 +129,8 @@ export function lcm (a, b) {
  *
  * @returns {bigint} maximum of numbers a and b
  */
-export function max (a, b) {
-  a = BigInt(a)
-  b = BigInt(b)
-  return (a >= b) ? a : b
+export function max(a, b) {
+  return a < b? b : a
 }
 
 /**
@@ -140,10 +141,8 @@ export function max (a, b) {
  *
  * @returns {bigint} minimum of numbers a and b
  */
-export function min (a, b) {
-  a = BigInt(a)
-  b = BigInt(b)
-  return (a >= b) ? b : a
+export function min(a, b) {
+  return a < b? a : b
 }
 
 /**
@@ -154,15 +153,14 @@ export function min (a, b) {
  *
  * @returns {bigint|NaN} the inverse modulo n or NaN if it does not exist
  */
-export function modInv (a, n) {
+export function modInv(a, n) {
   try {
     const egcd = eGcd(toZn(a, n), n)
-    if (egcd.g !== 1n) {
+    if(egcd.g != 1)
       return NaN // modular inverse does not exist
-    } else {
-      return toZn(egcd.x, n)
-    }
-  } catch (error) {
+    
+    return toZn(egcd.x, n)
+  } catch(error) {
     return NaN
   }
 }
@@ -176,26 +174,31 @@ export function modInv (a, n) {
  *
  * @returns {bigint} b**e mod n
  */
-export function modPow (b, e, n) {
-  n = BigInt(n)
-  if (n === 0n) { return NaN } else if (n === 1n) { return BigInt(0) }
+export function modPow(b, e, n) {  
+  if(b == 0) return NaN
+  if(b == 1) return 0n
+   
+  if(n == 0) throw new Error('cannot take modPow with modulus 0')
 
-  b = toZn(b, n)
-
+  b = BigInt(b)
   e = BigInt(e)
-  if (e < 0n) {
-    return modInv(modPow(b, abs(e), n), n)
-  }
+  n = BigInt(n)
+  
+	let r = 1n
+	b = b %= n
 
-  let r = 1n
-  while (e > 0) {
-    if ((e % 2n) === 1n) {
-      r = (r * b) % n
-    }
-    e = e / 2n
-    b = b ** 2n % n
-  }
-  return r
+	if(e < 0) {
+		e = -e
+		b = b ** (n - 2n) % n
+	}
+	while(e > 0) {
+		if(b == 0) return 0n
+		if(e % 2n == 1) r = r * b % n
+		e >>= 1n
+		b = b * b % n
+	}
+
+	return r
 }
 
 /**
@@ -205,10 +208,9 @@ export function modPow (b, e, n) {
  *
  * @returns {bigint} The smallest positive representation of a in modulo n
  */
-export function toZn (a, n) {
-  n = BigInt(n)
-  if (n <= 0) { return NaN }
+export function toZn(a, n) {
+  if(n <= 0) return NaN
 
-  a = BigInt(a) % n
-  return (a < 0) ? a + n : a
+  a %= n
+  return a < 0 ? a + n : a
 }
