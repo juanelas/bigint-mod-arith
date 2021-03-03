@@ -83,30 +83,25 @@ export function eGcd (a, b) {
  *
  * @returns {bigint} The greatest common divisor of a and b
  */
-export function gcd (a, b) {
-  a = abs(a)
-  b = abs(b)
-  if (a === 0n) { return b } else if (b === 0n) { return a }
+export function gcd(a, b) {
+  if(a == 0) return b
+  if(b == 0) return a
+  
+  if(a < 0) a = -a
+	if(b < 0) b = -b
 
-  let shift = 0n
-  while (!((a | b) & 1n)) {
-    a >>= 1n
-    b >>= 1n
-    shift++
-  }
-  while (!(a & 1n)) a >>= 1n
-  do {
-    while (!(b & 1n)) b >>= 1n
-    if (a > b) {
-      const x = a
-      a = b
-      b = x
-    }
-    b -= a
-  } while (b)
+	if(b > a) {
+		let t = a
+		a = b
+		b = t
+	}
 
-  // rescale
-  return a << shift
+	while(true) {
+		if(b == 0) return a
+		a %= b
+		if(a == 0) return b
+		b %= a
+	}
 }
 
 /**
