@@ -11,8 +11,8 @@
  * @returns {bigint} the absolute value of a
  */
 export function abs(a) {
-  if(value < 0) return -value
-  return value
+  if (a < 0) return -a
+  return a
 }
 
 /**
@@ -22,13 +22,13 @@ export function abs(a) {
  * @returns {number} - the bit length
  */
 export function bitLength(a) {
-  if(a == 1) return 1
+  if (a == 1) return 1
   a = BigInt(a)
-  
+
   let bits = 1
   do {
     bits++
-  } while((a >>= 1n) > 1n)
+  } while ((a >>= 1n) > 1n)
 
   return bits
 }
@@ -48,18 +48,18 @@ export function bitLength(a) {
  *
  * @returns {egcdReturn} A triple (g, x, y), such that ax + by = g = gcd(a, b).
  */
-export function eGcd(a, b) {
-  if(a <= 0 | b <= 0) throw new RangeError('a and b MUST be > 0') // a and b MUST be positive
+export function eGcd (a, b) {
+  if (a <= 0 | b <= 0) throw new RangeError('a and b MUST be > 0') // a and b MUST be positive
 
   a = BigInt(a)
   b = BigInt(b)
-  
+
   let x = 0n
   let y = 1n
   let u = 1n
   let v = 0n
 
-  while(a !== 0n) {
+  while (a != 0) {
     const q = b / a
     const r = b % a
     const m = x - u * q
@@ -71,6 +71,7 @@ export function eGcd(a, b) {
     u = m
     v = n
   }
+
   return {
     g: b,
     x: x,
@@ -87,22 +88,22 @@ export function eGcd(a, b) {
  * @returns {bigint} The greatest common divisor of a and b
  */
 export function gcd(a, b) {
-  if(a == 0) return b
-  if(b == 0) return a
-  
-  if(a < 0) a = -a
-  if(b < 0) b = -b
+  if (a == 0) return b
+  if (b == 0) return a
 
-  if(b > a) {
-    let t = a
+  if (a < 0) a = -a
+  if (b < 0) b = -b
+
+  if (b > a) {
+    const t = a
     a = b
     b = t
   }
 
-  while(true) {
-    if(b == 0) return a
+  while (true) {
+    if (b == 0) return a
     a %= b
-    if(a == 0) return b
+    if (a == 0) return b
     b %= a
   }
 }
@@ -130,7 +131,7 @@ export function lcm(a, b) {
  * @returns {bigint} maximum of numbers a and b
  */
 export function max(a, b) {
-  return a < b? b : a
+  return a < b ? b : a
 }
 
 /**
@@ -142,7 +143,7 @@ export function max(a, b) {
  * @returns {bigint} minimum of numbers a and b
  */
 export function min(a, b) {
-  return a < b? a : b
+  return a < b ? a : b
 }
 
 /**
@@ -156,11 +157,10 @@ export function min(a, b) {
 export function modInv(a, n) {
   try {
     const egcd = eGcd(toZn(a, n), n)
-    if(egcd.g != 1)
-      return NaN // modular inverse does not exist
-    
+    if (egcd.g != 1) return NaN // modular inverse does not exist
+
     return toZn(egcd.x, n)
-  } catch(error) {
+  } catch (error) {
     return NaN
   }
 }
@@ -174,31 +174,25 @@ export function modInv(a, n) {
  *
  * @returns {bigint} b**e mod n
  */
-export function modPow(b, e, n) {  
-  if(b == 0) return NaN
-  if(b == 1) return 0n
-   
-  if(n == 0) throw new Error('cannot take modPow with modulus 0')
+export function modPow(b, e, n) {
+  if (n == 0) return NaN
+  if (n == 1) return 0n
 
-  b = BigInt(b)
-  e = BigInt(e)
   n = BigInt(n)
-  
-	let r = 1n
-	b = b %= n
+  b = toZn(b, n)
+  e = BigInt(e)
 
-	if(e < 0) {
-		e = -e
-		b = b ** (n - 2n) % n
-	}
-	while(e > 0) {
-		if(b == 0) return 0n
-		if(e % 2n == 1) r = r * b % n
-		e >>= 1n
-		b = b * b % n
-	}
+  if (e < 0) { return modInv(modPow(b, abs(e), n), n) }
 
-	return r
+  let r = 1n
+  while (e > 0) {
+    if (e % 2n == 1) { r = r * b % n }
+
+    e >>= 1n
+    b = b * b % n
+  }
+
+  return r
 }
 
 /**
@@ -209,7 +203,7 @@ export function modPow(b, e, n) {
  * @returns {bigint} The smallest positive representation of a in modulo n
  */
 export function toZn(a, n) {
-  if(n <= 0) return NaN
+  if (n <= 0) return NaN
 
   a %= n
   return a < 0 ? a + n : a

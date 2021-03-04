@@ -126,8 +126,7 @@ Returns the bitlength of a number
 <a name="module_bigint-mod-arith..eGcd"></a>
 
 #### bigint-mod-arith~eGcd(a, b) ⇒ <code>egcdReturn</code>
-An iterative implementation of the extended euclidean algorithm or extended greatest common divisor algorithm.
-Take positive integers a, b as input, and return a triple (g, x, y), such that ax + by = g = gcd(a, b).
+An iterative implementation of the extended euclidean algorithm or extended greatest common divisor algorithm.Take positive integers a, b as input, and return a triple (g, x, y), such that ax + by = g = gcd(a, b).
 
 **Kind**: inner method of [<code>bigint-mod-arith</code>](#module_bigint-mod-arith)  
 **Returns**: <code>egcdReturn</code> - A triple (g, x, y), such that ax + by = g = gcd(a, b).  
