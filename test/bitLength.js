@@ -8,16 +8,16 @@ const chai = require('chai')
 
 const inputs = [
   {
-    value: BigInt(1),
+    value: 1n,
     bitLength: 1
   },
   {
-    value: BigInt(-2),
+    value: -2n,
     bitLength: 2
   },
   {
-    value: BigInt(11592217955149597331),
-    abs: BigInt(11592217955149597331),
+    value: 11592217955149597331n,
+    abs: 11592217955149597331n,
     bitLength: 64
   }
 ]

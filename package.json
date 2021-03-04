@@ -37,7 +37,7 @@
     "test": "nyc --check-coverage mocha",
     "coverage": "nyc report --reporter=lcov",
     "build:js": "rollup -c build/rollup.config.js",
-    "build:standard": "standard --fix",
+    "build:standard": "standardx --fix",
     "build:browserTests": "rollup -c build/rollup.tests.config.js",
     "build:docs": "node build/build.docs.js",
     "build:dts": "node build/build.dts.js",
@@ -45,7 +45,7 @@
     "preversion": "npm run build && npm run test",
     "postversion": "git push"
   },
-  "standard": {
+  "standardx": {
     "env": [
       "mocha"
     ],
@@ -70,7 +70,13 @@
     "nyc": "^15.0.1",
     "rollup": "^2.6.1",
     "rollup-plugin-terser": "^5.3.0",
-    "standard": "^14.3.3",
+    "standardx": "^7.0.0",
     "typescript": "^3.8.3"
+  },
+  "eslintConfig": {
+    "rules": {
+      "eqeqeq": "off",
+      "curly": "off"
+    }
   }
 }
