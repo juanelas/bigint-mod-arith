@@ -10,7 +10,7 @@
  *
  * @returns {bigint} the absolute value of a
  */
-export function abs(a) {
+export function abs (a) {
   if (a < 0) return -a
   return a
 }
@@ -21,7 +21,7 @@ export function abs(a) {
  * @param {number|bigint} a
  * @returns {number} - the bit length
  */
-export function bitLength(a) {
+export function bitLength (a) {
   if (a == 1) return 1
   a = BigInt(a)
 
@@ -87,7 +87,7 @@ export function eGcd (a, b) {
  *
  * @returns {bigint} The greatest common divisor of a and b
  */
-export function gcd(a, b) {
+export function gcd (a, b) {
   if (a == 0) return b
   if (b == 0) return a
 
@@ -115,7 +115,7 @@ export function gcd(a, b) {
  *
  * @returns {bigint} The least common multiple of a and b
  */
-export function lcm(a, b) {
+export function lcm (a, b) {
   if (a == 0 && b == 0n) return 0n
   a = BigInt(a)
   b = BigInt(b)
@@ -130,7 +130,7 @@ export function lcm(a, b) {
  *
  * @returns {bigint} maximum of numbers a and b
  */
-export function max(a, b) {
+export function max (a, b) {
   return a < b ? b : a
 }
 
@@ -142,7 +142,7 @@ export function max(a, b) {
  *
  * @returns {bigint} minimum of numbers a and b
  */
-export function min(a, b) {
+export function min (a, b) {
   return a < b ? a : b
 }
 
@@ -154,7 +154,7 @@ export function min(a, b) {
  *
  * @returns {bigint|NaN} the inverse modulo n or NaN if it does not exist
  */
-export function modInv(a, n) {
+export function modInv (a, n) {
   try {
     const egcd = eGcd(toZn(a, n), n)
     if (egcd.g != 1) return NaN // modular inverse does not exist
@@ -174,7 +174,7 @@ export function modInv(a, n) {
  *
  * @returns {bigint} b**e mod n
  */
-export function modPow(b, e, n) {
+export function modPow (b, e, n) {
   if (n == 0) return NaN
   if (n == 1) return 0n
 
@@ -182,11 +182,11 @@ export function modPow(b, e, n) {
   b = toZn(b, n)
   e = BigInt(e)
 
-  if (e < 0) { return modInv(modPow(b, abs(e), n), n) }
+  if (e < 0) return modInv(modPow(b, abs(e), n), n)
 
   let r = 1n
   while (e > 0) {
-    if (e % 2n == 1) { r = r * b % n }
+    if (e % 2n == 1) r = r * b % n
 
     e >>= 1n
     b = b * b % n
@@ -202,7 +202,7 @@ export function modPow(b, e, n) {
  *
  * @returns {bigint} The smallest positive representation of a in modulo n
  */
-export function toZn(a, n) {
+export function toZn (a, n) {
   if (n <= 0) return NaN
 
   a %= n
