@@ -8,33 +8,33 @@ const chai = require('chai')
 
 const inputs = [
   {
-    a: BigInt(1),
-    n: BigInt(19),
-    modInv: BigInt(1)
+    a: 1n,
+    n: 19n,
+    modInv: 1n
   },
   {
-    a: BigInt(2),
-    n: BigInt(5),
-    modInv: BigInt(3)
+    a: 2n,
+    n: 5n,
+    modInv: 3n
   },
   {
-    a: BigInt(-2),
-    n: BigInt(5),
-    modInv: BigInt(2)
+    a: -2n,
+    n: 5n,
+    modInv: 2n
   },
   {
-    a: BigInt(2),
-    n: BigInt(4),
+    a: 2n,
+    n: 4n,
     modInv: NaN
   },
   {
-    a: BigInt(0),
-    n: BigInt(0),
+    a: 0n,
+    n: 0n,
     modInv: NaN
   },
   {
-    a: BigInt(0),
-    n: BigInt(37),
+    a: 0n,
+    n: 37n,
     modInv: NaN
   }
 ]
