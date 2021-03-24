@@ -12,9 +12,9 @@ node_modules
 # Visual Studio Code
 .vscode
 
-# IntelliJ
-.idea
-
 # MYC output
 .nyc_output
-coverage/*
+coverage
+
+# Test temporal files
+.mocha-ts
