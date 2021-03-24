@@ -5,7 +5,8 @@
  * @returns The bit length
  */
 export function bitLength (a: number|bigint): number {
-  a = BigInt(a)
+  if (typeof a === 'number') a = BigInt(a)
+
   if (a === 1n) { return 1 }
   let bits = 1
   do {

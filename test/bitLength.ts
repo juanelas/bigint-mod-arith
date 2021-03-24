@@ -5,6 +5,10 @@ describe('bitLength', function () {
       bitLength: 1
     },
     {
+      value: 15,
+      bitLength: 4
+    },
+    {
       value: BigInt(-2),
       bitLength: 2
     },

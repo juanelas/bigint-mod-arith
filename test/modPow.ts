@@ -14,18 +14,18 @@ describe('modPow', function () {
     },
     {
       a: BigInt(4),
-      b: BigInt(-1),
+      b: -1,
       n: BigInt(19),
       modPow: BigInt(5)
     },
     {
       a: BigInt(-5),
       b: BigInt(2),
-      n: BigInt(7),
+      n: 7,
       modPow: BigInt(4)
     },
     {
-      a: BigInt(2),
+      a: 2,
       b: BigInt(255),
       n: BigInt(64),
       modPow: BigInt(0)

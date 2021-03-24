@@ -6,8 +6,8 @@ describe('lcm', function () {
       lcm: BigInt(0)
     },
     {
-      a: BigInt(1),
-      b: BigInt(1),
+      a: 1,
+      b: 1,
       lcm: BigInt(1)
     },
     {

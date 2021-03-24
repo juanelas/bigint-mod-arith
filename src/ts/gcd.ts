@@ -8,9 +8,14 @@ import { abs } from './abs'
  * @returns The greatest common divisor of a and b
  */
 export function gcd (a: number|bigint, b: number|bigint): bigint {
-  let aAbs = BigInt(abs(a))
-  let bAbs = BigInt(abs(b))
-  if (aAbs === 0n) { return bAbs } else if (bAbs === 0n) { return aAbs }
+  let aAbs = (typeof a === 'number') ? BigInt(abs(a)) : abs(a) as bigint
+  let bAbs = (typeof b === 'number') ? BigInt(abs(b)) : abs(b) as bigint
+
+  if (aAbs === 0n) {
+    return bAbs
+  } else if (bAbs === 0n) {
+    return aAbs
+  }
 
   let shift = 0n
   while (((aAbs | bAbs) & 1n) === 0n) {

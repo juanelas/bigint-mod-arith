@@ -6,13 +6,13 @@ describe('toZn', function () {
       toZn: BigInt(1)
     },
     {
-      a: BigInt(-25),
+      a: -25,
       n: BigInt(9),
       toZn: BigInt(2)
     },
     {
       a: BigInt('12359782465012847510249'),
-      n: BigInt(5),
+      n: 5,
       toZn: BigInt(4)
     }
   ]

@@ -1,8 +1,8 @@
 describe('abs', function () {
   const inputs = [
     {
-      value: BigInt(1),
-      abs: BigInt(1)
+      value: 1,
+      abs: 1
     },
     {
       value: BigInt(-2),

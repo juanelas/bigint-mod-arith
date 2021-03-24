@@ -41,7 +41,7 @@ Name | Type |
 
 The absolute value of a
 
-Defined in: ts/abs.ts:8
+Defined in: [ts/abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/abs.ts#L8)
 
 ___
 
@@ -61,7 +61,7 @@ Name | Type |
 
 The bit length
 
-Defined in: ts/bitLength.ts:7
+Defined in: [ts/bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/bitLength.ts#L7)
 
 ___
 
@@ -83,7 +83,7 @@ Name | Type |
 
 A triple (g, x, y), such that ax + by = g = gcd(a, b).
 
-Defined in: ts/egcd.ts:15
+Defined in: [ts/egcd.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/egcd.ts#L15)
 
 ___
 
@@ -104,7 +104,7 @@ Name | Type |
 
 The greatest common divisor of a and b
 
-Defined in: ts/gcd.ts:10
+Defined in: [ts/gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/gcd.ts#L10)
 
 ___
 
@@ -125,7 +125,7 @@ Name | Type |
 
 The least common multiple of a and b
 
-Defined in: ts/lcm.ts:10
+Defined in: [ts/lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/lcm.ts#L10)
 
 ___
 
@@ -146,7 +146,7 @@ Name | Type |
 
 Maximum of numbers a and b
 
-Defined in: ts/max.ts:9
+Defined in: [ts/max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/max.ts#L9)
 
 ___
 
@@ -167,7 +167,7 @@ Name | Type |
 
 Minimum of numbers a and b
 
-Defined in: ts/min.ts:9
+Defined in: [ts/min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/min.ts#L9)
 
 ___
 
@@ -188,7 +188,7 @@ Name | Type | Description |
 
 The inverse modulo n or number NaN if it does not exist
 
-Defined in: ts/modInv.ts:11
+Defined in: [ts/modInv.ts:11](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/modInv.ts#L11)
 
 ___
 
@@ -210,7 +210,7 @@ Name | Type | Description |
 
 b**e mod n or number NaN if n <= 0
 
-Defined in: ts/modPow.ts:13
+Defined in: [ts/modPow.ts:13](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/modPow.ts#L13)
 
 ___
 
@@ -219,6 +219,9 @@ ___
 ▸ **toZn**(`a`: *number* \| *bigint*, `n`: *number* \| *bigint*): *bigint* \| *number*
 
 Finds the smallest positive element that is congruent to a in modulo n
+
+**`remarks`** 
+a and b must be the same type, either number or bigint
 
 #### Parameters:
 
@@ -229,6 +232,6 @@ Name | Type | Description |
 
 **Returns:** *bigint* \| *number*
 
-The smallest positive representation of a in modulo n or number NaN if n < 0
+A bigint with the smallest positive representation of a modulo n or number NaN if n < 0
 
-Defined in: ts/toZn.ts:8
+Defined in: [ts/toZn.ts:12](https://github.com/juanelas/bigint-mod-arith/blob/fd780cb/src/ts/toZn.ts#L12)

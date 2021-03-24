@@ -13,29 +13,30 @@ export interface Egcd {
  * @returns A triple (g, x, y), such that ax + by = g = gcd(a, b).
  */
 export function eGcd (a: number|bigint, b: number|bigint): Egcd {
-  let aBigint = BigInt(a)
-  let bBigInt = BigInt(b)
-  if (aBigint <= 0n || bBigInt <= 0n) throw new RangeError('a and b MUST be > 0') // a and b MUST be positive
+  if (typeof a === 'number') a = BigInt(a)
+  if (typeof b === 'number') b = BigInt(b)
+
+  if (a <= 0n || b <= 0n) throw new RangeError('a and b MUST be > 0') // a and b MUST be positive
 
   let x = 0n
   let y = 1n
   let u = 1n
   let v = 0n
 
-  while (aBigint !== 0n) {
-    const q = bBigInt / aBigint
-    const r = bBigInt % aBigint
+  while (a !== 0n) {
+    const q = b / a
+    const r: bigint = b % a
     const m = x - (u * q)
     const n = y - (v * q)
-    bBigInt = aBigint
-    aBigint = r
+    b = a
+    a = r
     x = u
     y = v
     u = m
     v = n
   }
   return {
-    g: bBigInt,
+    g: b,
     x: x,
     y: y
   }

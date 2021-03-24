@@ -1,8 +1,8 @@
 describe('gcd', function () {
   const inputs = [
     {
-      a: BigInt(1),
-      b: BigInt(1),
+      a: 1,
+      b: 1,
       gcd: BigInt(1)
     },
     {

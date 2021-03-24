@@ -11,23 +11,25 @@ import { toZn } from './toZn'
  * @returns b**e mod n or number NaN if n <= 0
  */
 export function modPow (b: number|bigint, e: number|bigint, n: number|bigint): bigint|number {
-  const nBigInt = BigInt(n)
-  if (nBigInt <= 0n) { return NaN } else if (nBigInt === 1n) { return BigInt(0) }
+  if (typeof b === 'number') b = BigInt(b)
+  if (typeof e === 'number') e = BigInt(e)
+  if (typeof n === 'number') n = BigInt(n)
 
-  let bZn = toZn(b, nBigInt)
+  if (n <= 0n) { return NaN } else if (n === 1n) { return BigInt(0) }
 
-  e = BigInt(e)
+  b = toZn(b, n) as bigint
+
   if (e < 0n) {
-    return modInv(modPow(bZn, abs(e), nBigInt), nBigInt)
+    return modInv(modPow(b, abs(e), n), n)
   }
 
   let r = 1n
   while (e > 0) {
     if ((e % 2n) === 1n) {
-      r = (r * (bZn as bigint)) % nBigInt
+      r = r * b % n
     }
     e = e / 2n
-    bZn = bZn as bigint ** 2n % nBigInt
+    b = b ** 2n % n
   }
   return r
 }
