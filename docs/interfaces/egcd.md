@@ -16,7 +16,7 @@
 
 • **g**: *bigint*
 
-Defined in: [ts/egcd.ts:2](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/egcd.ts#L2)
+Defined in: [ts/egcd.ts:2](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/egcd.ts#L2)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 • **x**: *bigint*
 
-Defined in: [ts/egcd.ts:3](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/egcd.ts#L3)
+Defined in: [ts/egcd.ts:3](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/egcd.ts#L3)
 
 ___
 
@@ -32,4 +32,4 @@ ___
 
 • **y**: *bigint*
 
-Defined in: [ts/egcd.ts:4](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/egcd.ts#L4)
+Defined in: [ts/egcd.ts:4](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/egcd.ts#L4)

@@ -5,7 +5,10 @@
  * @param e exponent
  * @param n modulo
  *
- * @returns b**e mod n or number NaN if n <= 0
+ * @throws {RangeError}
+ * Excpeption thrown when n is not > 0
+ *
+ * @returns b**e mod n
  */
-export declare function modPow(b: number | bigint, e: number | bigint, n: number | bigint): bigint | number;
+export declare function modPow(b: number | bigint, e: number | bigint, n: number | bigint): bigint;
 //# sourceMappingURL=modPow.d.ts.map

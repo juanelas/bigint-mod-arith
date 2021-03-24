@@ -41,7 +41,7 @@ Name | Type |
 
 The absolute value of a
 
-Defined in: [ts/abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/abs.ts#L8)
+Defined in: [ts/abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/abs.ts#L8)
 
 ___
 
@@ -61,7 +61,7 @@ Name | Type |
 
 The bit length
 
-Defined in: [ts/bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/bitLength.ts#L7)
+Defined in: [ts/bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/bitLength.ts#L7)
 
 ___
 
@@ -71,6 +71,9 @@ ___
 
 An iterative implementation of the extended euclidean algorithm or extended greatest common divisor algorithm.
 Take positive integers a, b as input, and return a triple (g, x, y), such that ax + by = g = gcd(a, b).
+
+**`throws`** {RangeError}
+This excepction is thrown if a or b are less than 0
 
 #### Parameters:
 
@@ -83,7 +86,7 @@ Name | Type |
 
 A triple (g, x, y), such that ax + by = g = gcd(a, b).
 
-Defined in: [ts/egcd.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/egcd.ts#L15)
+Defined in: [ts/egcd.ts:18](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/egcd.ts#L18)
 
 ___
 
@@ -104,7 +107,7 @@ Name | Type |
 
 The greatest common divisor of a and b
 
-Defined in: [ts/gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/gcd.ts#L10)
+Defined in: [ts/gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/gcd.ts#L10)
 
 ___
 
@@ -125,7 +128,7 @@ Name | Type |
 
 The least common multiple of a and b
 
-Defined in: [ts/lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/lcm.ts#L10)
+Defined in: [ts/lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/lcm.ts#L10)
 
 ___
 
@@ -146,7 +149,7 @@ Name | Type |
 
 Maximum of numbers a and b
 
-Defined in: [ts/max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/max.ts#L9)
+Defined in: [ts/max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/max.ts#L9)
 
 ___
 
@@ -167,15 +170,18 @@ Name | Type |
 
 Minimum of numbers a and b
 
-Defined in: [ts/min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/min.ts#L9)
+Defined in: [ts/min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/min.ts#L9)
 
 ___
 
 ### modInv
 
-▸ **modInv**(`a`: *number* \| *bigint*, `n`: *number* \| *bigint*): *bigint* \| *number*
+▸ **modInv**(`a`: *number* \| *bigint*, `n`: *number* \| *bigint*): *bigint*
 
 Modular inverse.
+
+**`throws`** {RangeError}
+Excpeption thorwn when a does not have inverse modulo n
 
 #### Parameters:
 
@@ -184,19 +190,22 @@ Name | Type | Description |
 `a` | *number* \| *bigint* | The number to find an inverse for   |
 `n` | *number* \| *bigint* | The modulo    |
 
-**Returns:** *bigint* \| *number*
+**Returns:** *bigint*
 
-The inverse modulo n or number NaN if it does not exist
+The inverse modulo n
 
-Defined in: [ts/modInv.ts:11](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/modInv.ts#L11)
+Defined in: [ts/modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/modInv.ts#L14)
 
 ___
 
 ### modPow
 
-▸ **modPow**(`b`: *number* \| *bigint*, `e`: *number* \| *bigint*, `n`: *number* \| *bigint*): *bigint* \| *number*
+▸ **modPow**(`b`: *number* \| *bigint*, `e`: *number* \| *bigint*, `n`: *number* \| *bigint*): *bigint*
 
 Modular exponentiation b**e mod n. Currently using the right-to-left binary method
+
+**`throws`** {RangeError}
+Excpeption thrown when n is not > 0
 
 #### Parameters:
 
@@ -206,22 +215,25 @@ Name | Type | Description |
 `e` | *number* \| *bigint* | exponent   |
 `n` | *number* \| *bigint* | modulo    |
 
-**Returns:** *bigint* \| *number*
+**Returns:** *bigint*
 
-b**e mod n or number NaN if n <= 0
+b**e mod n
 
-Defined in: [ts/modPow.ts:13](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/modPow.ts#L13)
+Defined in: [ts/modPow.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/modPow.ts#L16)
 
 ___
 
 ### toZn
 
-▸ **toZn**(`a`: *number* \| *bigint*, `n`: *number* \| *bigint*): *bigint* \| *number*
+▸ **toZn**(`a`: *number* \| *bigint*, `n`: *number* \| *bigint*): *bigint*
 
 Finds the smallest positive element that is congruent to a in modulo n
 
 **`remarks`** 
 a and b must be the same type, either number or bigint
+
+**`throws`** {RangeError}
+Excpeption thrown when n is not > 0
 
 #### Parameters:
 
@@ -230,8 +242,8 @@ Name | Type | Description |
 `a` | *number* \| *bigint* | An integer   |
 `n` | *number* \| *bigint* | The modulo    |
 
-**Returns:** *bigint* \| *number*
+**Returns:** *bigint*
 
-A bigint with the smallest positive representation of a modulo n or number NaN if n < 0
+A bigint with the smallest positive representation of a modulo n
 
-Defined in: [ts/toZn.ts:12](https://github.com/juanelas/bigint-mod-arith/blob/6131edd/src/ts/toZn.ts#L12)
+Defined in: [ts/toZn.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/toZn.ts#L15)

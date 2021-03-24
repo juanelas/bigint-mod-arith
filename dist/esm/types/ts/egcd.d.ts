@@ -10,6 +10,9 @@ export interface Egcd {
  * @param a
  * @param b
  *
+ * @throws {RangeError}
+ * This excepction is thrown if a or b are less than 0
+ *
  * @returns A triple (g, x, y), such that ax + by = g = gcd(a, b).
  */
 export declare function eGcd(a: number | bigint, b: number | bigint): Egcd;

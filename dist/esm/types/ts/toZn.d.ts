@@ -4,10 +4,13 @@
  * @remarks
  * a and b must be the same type, either number or bigint
  *
- * @param {number|bigint} a An integer
- * @param {number|bigint} n The modulo
+ * @param a - An integer
+ * @param n - The modulo
  *
- * @returns A bigint with the smallest positive representation of a modulo n or number NaN if n < 0
+ * @throws {RangeError}
+ * Excpeption thrown when n is not > 0
+ *
+ * @returns A bigint with the smallest positive representation of a modulo n
  */
-export declare function toZn(a: number | bigint, n: number | bigint): bigint | number;
+export declare function toZn(a: number | bigint, n: number | bigint): bigint;
 //# sourceMappingURL=toZn.d.ts.map

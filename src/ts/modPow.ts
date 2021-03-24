@@ -8,16 +8,23 @@ import { toZn } from './toZn'
  * @param e exponent
  * @param n modulo
  *
- * @returns b**e mod n or number NaN if n <= 0
+ * @throws {RangeError}
+ * Excpeption thrown when n is not > 0
+ *
+ * @returns b**e mod n
  */
-export function modPow (b: number|bigint, e: number|bigint, n: number|bigint): bigint|number {
+export function modPow (b: number|bigint, e: number|bigint, n: number|bigint): bigint {
   if (typeof b === 'number') b = BigInt(b)
   if (typeof e === 'number') e = BigInt(e)
   if (typeof n === 'number') n = BigInt(n)
 
-  if (n <= 0n) { return NaN } else if (n === 1n) { return BigInt(0) }
+  if (n <= 0n) {
+    throw new RangeError('n must be > 0')
+  } else if (n === 1n) {
+    return 0n
+  }
 
-  b = toZn(b, n) as bigint
+  b = toZn(b, n)
 
   if (e < 0n) {
     return modInv(modPow(b, abs(e), n), n)
