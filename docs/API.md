@@ -1,6 +1,6 @@
-bigint-mod-arith - v2.1.0
+bigint-mod-arith - v3.0.0
 
-# bigint-mod-arith - v2.1.0
+# bigint-mod-arith - v3.0.0
 
 Some common functions for modular arithmetic using native JS implementation of BigInt
 
@@ -41,7 +41,7 @@ Name | Type |
 
 The absolute value of a
 
-Defined in: [ts/abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/abs.ts#L8)
+Defined in: [ts/abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/abs.ts#L8)
 
 ___
 
@@ -61,7 +61,7 @@ Name | Type |
 
 The bit length
 
-Defined in: [ts/bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/bitLength.ts#L7)
+Defined in: [ts/bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/bitLength.ts#L7)
 
 ___
 
@@ -86,7 +86,7 @@ Name | Type |
 
 A triple (g, x, y), such that ax + by = g = gcd(a, b).
 
-Defined in: [ts/egcd.ts:18](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/egcd.ts#L18)
+Defined in: [ts/egcd.ts:18](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/egcd.ts#L18)
 
 ___
 
@@ -107,7 +107,7 @@ Name | Type |
 
 The greatest common divisor of a and b
 
-Defined in: [ts/gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/gcd.ts#L10)
+Defined in: [ts/gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/gcd.ts#L10)
 
 ___
 
@@ -128,7 +128,7 @@ Name | Type |
 
 The least common multiple of a and b
 
-Defined in: [ts/lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/lcm.ts#L10)
+Defined in: [ts/lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/lcm.ts#L10)
 
 ___
 
@@ -149,7 +149,7 @@ Name | Type |
 
 Maximum of numbers a and b
 
-Defined in: [ts/max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/max.ts#L9)
+Defined in: [ts/max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/max.ts#L9)
 
 ___
 
@@ -170,7 +170,7 @@ Name | Type |
 
 Minimum of numbers a and b
 
-Defined in: [ts/min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/min.ts#L9)
+Defined in: [ts/min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/min.ts#L9)
 
 ___
 
@@ -194,7 +194,7 @@ Name | Type | Description |
 
 The inverse modulo n
 
-Defined in: [ts/modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/modInv.ts#L14)
+Defined in: [ts/modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/modInv.ts#L14)
 
 ___
 
@@ -219,7 +219,7 @@ Name | Type | Description |
 
 b**e mod n
 
-Defined in: [ts/modPow.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/modPow.ts#L16)
+Defined in: [ts/modPow.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/modPow.ts#L16)
 
 ___
 
@@ -246,4 +246,4 @@ Name | Type | Description |
 
 A bigint with the smallest positive representation of a modulo n
 
-Defined in: [ts/toZn.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/806cc27/src/ts/toZn.ts#L15)
+Defined in: [ts/toZn.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/d947979/src/ts/toZn.ts#L15)
