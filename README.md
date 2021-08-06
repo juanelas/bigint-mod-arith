@@ -23,6 +23,12 @@ Then either require (Node.js CJS):
 const bigintModArith = require('bigint-mod-arith')
 ```
 
+> **Node >=10.4 <11**. `bigint-mod-arith` uses workers to speed up some operations. Workers are enabled by default with Node.js from version 11. In order to use them with Node >=10.4 and <11, you need to execute node with the flag `--experimental-worker`, and require the .js file manually (otherwise .cjs is required by default and would not be supported by the workers)
+>
+> ```javascript
+> const bigintCryptoUtils = require('bigint-crypto-utils/dist/cjs/index.node')  // ONLY FOR node >=10.4 <11 !
+> ```
+
 or import (JavaScript ES module):
 
 ```javascript
@@ -31,7 +37,7 @@ import * as bigintModArith from 'bigint-mod-arith'
 
 The appropriate version for browser or node is automatically exported.
 
-You can also download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/bigint-mod-arith.iife.js), the [ESM bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/bigint-mod-arith.esm.js) or the [UMD bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/bigint-mod-arith.umd.js) and manually add it to your project, or, if you have already imported `bigint-mod-arith` to your project, just get the bundles from `node_modules/bigint-mod-arith/dist/bundles/`.
+You can also download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/iife.js), the [ESM bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/esm.js) or the [UMD bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/umd.js) and manually add it to your project, or, if you have already imported `bigint-mod-arith` to your project, just get the bundles from `node_modules/bigint-mod-arith/dist/bundles/`.
 
 An example of usage could be:
 

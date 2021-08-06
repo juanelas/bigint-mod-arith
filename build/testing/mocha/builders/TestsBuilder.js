@@ -28,7 +28,8 @@ module.exports = class TestsBuilder extends Builder {
       const fileStr = fs.readFileSync(path, 'utf8')
       const config = JSON5.parse(fileStr)
       if (config.file) delete config.file
-      config.include = ['build/typings/**/*.ts', 'test/**/*.ts', 'src/**/*.spec.ts']
+      config.include.push('node_modules/**/*.d.ts')
+      config.compilerOptions.module = 'commonjs'
       return JSON.stringify(config)
     }
     const configFile = ts.readJsonConfigFile(configPath, readFileAndMangle)
@@ -68,7 +69,6 @@ module.exports = class TestsBuilder extends Builder {
         ...parsedTsConfig.options,
         rootDir,
         outDir: this.tempDir,
-        module: 'commonjs',
         noEmit: false,
         noResolve: true,
         sourceMap: true

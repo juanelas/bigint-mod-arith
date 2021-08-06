@@ -23,11 +23,12 @@ async function typedoc () {
 
   app.bootstrap({
     // typedoc options here
-    entryPoints: ['src/index.ts'],
+    entryPoints: ['src/ts/index.ts'],
     plugin: ['typedoc-plugin-markdown'],
     includeVersion: true,
     entryDocument: 'API.md',
-    readme: 'none'
+    readme: 'none',
+    hideBreadcrumbs: true
   })
 
   const project = app.convert()
@@ -49,7 +50,7 @@ function getRepositoryData () {
       return {
         repoProvider,
         repoUsername: repodata[1],
-        repoName: repodata[2]
+        repoName: repodata.slice(2).join('/')
       }
     } else return null
   }
@@ -61,21 +62,25 @@ const regex = /^(?:(?<scope>@.*?)\/)?(?<name>.*)/ // We are going to take only t
 const { name } = pkgJson.name.match(regex).groups
 const camelCaseName = camelise(name)
 
+const iifeBundlePath = path.relative('.', pkgJson.exports['./iife-browser-bundle'])
+const esmBundlePath = path.relative('.', pkgJson.exports['./esm-browser-bundle'])
+const umdBundlePath = path.relative('.', pkgJson.exports['./umd-browser-bundle'])
+
 let iifeBundle, esmBundle, umdBundle, workflowBadget, coverallsBadge
 if (repoProvider) {
   switch (repoProvider) {
     case 'github':
-      iifeBundle = `[IIFE bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/dist/bundles/${name}.iife.js)`
-      esmBundle = `[ESM bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/dist/bundles/${name}.esm.js)`
-      umdBundle = `[UMD bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/dist/bundles/${name}.umd.js)`
+      iifeBundle = `[IIFE bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/${iifeBundlePath})`
+      esmBundle = `[ESM bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/${esmBundlePath})`
+      umdBundle = `[UMD bundle](https://raw.githubusercontent.com/${repoUsername}/${repoName}/master/${umdBundlePath})`
       workflowBadget = `[![Node CI](https://github.com/${repoUsername}/${repoName}/workflows/Node%20CI/badge.svg)](https://github.com/${repoUsername}/${repoName}/actions?query=workflow%3A%22Node+CI%22)`
       coverallsBadge = `[![Coverage Status](https://coveralls.io/repos/github/${repoUsername}/${repoName}/badge.svg?branch=master)](https://coveralls.io/github/${repoUsername}/${repoName}?branch=master)`
       break
 
     case 'gitlab':
-      iifeBundle = `[IIFE bundle](https://gitlab.com/${repoUsername}/${repoName}/-/raw/master/dist/bundles/${name}.iife.js?inline=false)`
-      esmBundle = `[ESM bundle](https://gitlab.com/${repoUsername}/${repoName}/-/raw/master/dist/bundles/${name}.esm.js?inline=false)`
-      umdBundle = `[IIFE bundle](https://gitlab.com/${repoUsername}/${repoName}/-/raw/master/dist/bundles/${name}.umd.js?inline=false)`
+      iifeBundle = `[IIFE bundle](https://gitlab.com/${repoUsername}/${repoName}/-/raw/master/dist/${iifeBundlePath}?inline=false)`
+      esmBundle = `[ESM bundle](https://gitlab.com/${repoUsername}/${repoName}/-/raw/master/dist/${esmBundlePath}?inline=false)`
+      umdBundle = `[UMD bundle](https://gitlab.com/${repoUsername}/${repoName}/-/raw/master/dist/${umdBundlePath}?inline=false)`
       break
 
     default:
@@ -93,6 +98,8 @@ let template = fs.readFileSync(templateFile, { encoding: 'UTF-8' })
 
 if (repoProvider && repoProvider === 'github') {
   template = template.replace(/\{\{GITHUB_ACTIONS_BADGES\}\}/g, workflowBadget + '\n' + coverallsBadge)
+} else {
+  template = template.replace(/\{\{GITHUB_ACTIONS_BADGES\}\}/g, '')
 }
 
 const readmeFile = path.join(rootDir, 'README.md')
