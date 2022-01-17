@@ -1,1 +1,242 @@
-function n(n){return n>=0?n:-n}function t(n){if("number"==typeof n&&(n=BigInt(n)),1n===n)return 1;let t=1;do{t++}while((n>>=1n)>1n);return t}function r(n,t){if("number"==typeof n&&(n=BigInt(n)),"number"==typeof t&&(t=BigInt(t)),n<=0n||t<=0n)throw new RangeError("a and b MUST be > 0");let r=0n,e=1n,o=1n,u=0n;for(;0n!==n;){const i=t/n,f=t%n,g=r-o*i,b=e-u*i;t=n,n=f,r=o,e=u,o=g,u=b}return{g:t,x:r,y:e}}function e(t,r){let e="number"==typeof t?BigInt(n(t)):n(t),o="number"==typeof r?BigInt(n(r)):n(r);if(0n===e)return o;if(0n===o)return e;let u=0n;for(;0n===(1n&(e|o));)e>>=1n,o>>=1n,u++;for(;0n===(1n&e);)e>>=1n;do{for(;0n===(1n&o);)o>>=1n;if(e>o){const n=e;e=o,o=n}o-=e}while(0n!==o);return e<<u}function o(t,r){return"number"==typeof t&&(t=BigInt(t)),"number"==typeof r&&(r=BigInt(r)),0n===t&&0n===r?BigInt(0):n(t*r)/e(t,r)}function u(n,t){return n>=t?n:t}function i(n,t){return n>=t?t:n}function f(n,t){if("number"==typeof n&&(n=BigInt(n)),"number"==typeof t&&(t=BigInt(t)),t<=0n)throw new RangeError("n must be > 0");const r=n%t;return r<0n?r+t:r}function g(n,t){const e=r(f(n,t),t);if(1n!==e.g)throw new RangeError(`${n.toString()} does not have inverse modulo ${t.toString()}`);return f(e.x,t)}function b(t,r,e){if("number"==typeof t&&(t=BigInt(t)),"number"==typeof r&&(r=BigInt(r)),"number"==typeof e&&(e=BigInt(e)),e<=0n)throw new RangeError("n must be > 0");if(1n===e)return 0n;if(t=f(t,e),r<0n)return g(b(t,n(r),e),e);let o=1n;for(;r>0;)r%2n===1n&&(o=o*t%e),r/=2n,t=t**2n%e;return o}export{n as abs,t as bitLength,r as eGcd,e as gcd,o as lcm,u as max,i as min,g as modInv,b as modPow,f as toZn};
+/**
+ * Absolute value. abs(a)==a if a>=0. abs(a)==-a if a<0
+ *
+ * @param a
+ *
+ * @returns The absolute value of a
+ */
+function abs(a) {
+    return (a >= 0) ? a : -a;
+}
+
+/**
+ * Returns the bitlength of a number
+ *
+ * @param a
+ * @returns The bit length
+ */
+function bitLength(a) {
+    if (typeof a === 'number')
+        a = BigInt(a);
+    if (a === 1n) {
+        return 1;
+    }
+    let bits = 1;
+    do {
+        bits++;
+    } while ((a >>= 1n) > 1n);
+    return bits;
+}
+
+/**
+ * An iterative implementation of the extended euclidean algorithm or extended greatest common divisor algorithm.
+ * Take positive integers a, b as input, and return a triple (g, x, y), such that ax + by = g = gcd(a, b).
+ *
+ * @param a
+ * @param b
+ *
+ * @throws {RangeError}
+ * This excepction is thrown if a or b are less than 0
+ *
+ * @returns A triple (g, x, y), such that ax + by = g = gcd(a, b).
+ */
+function eGcd(a, b) {
+    if (typeof a === 'number')
+        a = BigInt(a);
+    if (typeof b === 'number')
+        b = BigInt(b);
+    if (a <= 0n || b <= 0n)
+        throw new RangeError('a and b MUST be > 0'); // a and b MUST be positive
+    let x = 0n;
+    let y = 1n;
+    let u = 1n;
+    let v = 0n;
+    while (a !== 0n) {
+        const q = b / a;
+        const r = b % a;
+        const m = x - (u * q);
+        const n = y - (v * q);
+        b = a;
+        a = r;
+        x = u;
+        y = v;
+        u = m;
+        v = n;
+    }
+    return {
+        g: b,
+        x: x,
+        y: y
+    };
+}
+
+/**
+ * Greatest-common divisor of two integers based on the iterative binary algorithm.
+ *
+ * @param a
+ * @param b
+ *
+ * @returns The greatest common divisor of a and b
+ */
+function gcd(a, b) {
+    let aAbs = (typeof a === 'number') ? BigInt(abs(a)) : abs(a);
+    let bAbs = (typeof b === 'number') ? BigInt(abs(b)) : abs(b);
+    if (aAbs === 0n) {
+        return bAbs;
+    }
+    else if (bAbs === 0n) {
+        return aAbs;
+    }
+    let shift = 0n;
+    while (((aAbs | bAbs) & 1n) === 0n) {
+        aAbs >>= 1n;
+        bAbs >>= 1n;
+        shift++;
+    }
+    while ((aAbs & 1n) === 0n)
+        aAbs >>= 1n;
+    do {
+        while ((bAbs & 1n) === 0n)
+            bAbs >>= 1n;
+        if (aAbs > bAbs) {
+            const x = aAbs;
+            aAbs = bAbs;
+            bAbs = x;
+        }
+        bAbs -= aAbs;
+    } while (bAbs !== 0n);
+    // rescale
+    return aAbs << shift;
+}
+
+/**
+ * The least common multiple computed as abs(a*b)/gcd(a,b)
+ * @param a
+ * @param b
+ *
+ * @returns The least common multiple of a and b
+ */
+function lcm(a, b) {
+    if (typeof a === 'number')
+        a = BigInt(a);
+    if (typeof b === 'number')
+        b = BigInt(b);
+    if (a === 0n && b === 0n)
+        return BigInt(0);
+    // return abs(a * b) as bigint / gcd(a, b)
+    return abs((a / gcd(a, b)) * b);
+}
+
+/**
+ * Maximum. max(a,b)==a if a>=b. max(a,b)==b if a<=b
+ *
+ * @param a
+ * @param b
+ *
+ * @returns Maximum of numbers a and b
+ */
+function max(a, b) {
+    return (a >= b) ? a : b;
+}
+
+/**
+ * Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<=b
+ *
+ * @param a
+ * @param b
+ *
+ * @returns Minimum of numbers a and b
+ */
+function min(a, b) {
+    return (a >= b) ? b : a;
+}
+
+/**
+ * Finds the smallest positive element that is congruent to a in modulo n
+ *
+ * @remarks
+ * a and b must be the same type, either number or bigint
+ *
+ * @param a - An integer
+ * @param n - The modulo
+ *
+ * @throws {RangeError}
+ * Excpeption thrown when n is not > 0
+ *
+ * @returns A bigint with the smallest positive representation of a modulo n
+ */
+function toZn(a, n) {
+    if (typeof a === 'number')
+        a = BigInt(a);
+    if (typeof n === 'number')
+        n = BigInt(n);
+    if (n <= 0n) {
+        throw new RangeError('n must be > 0');
+    }
+    const aZn = a % n;
+    return (aZn < 0n) ? aZn + n : aZn;
+}
+
+/**
+ * Modular inverse.
+ *
+ * @param a The number to find an inverse for
+ * @param n The modulo
+ *
+ * @throws {RangeError}
+ * Excpeption thorwn when a does not have inverse modulo n
+ *
+ * @returns The inverse modulo n
+ */
+function modInv(a, n) {
+    const egcd = eGcd(toZn(a, n), n);
+    if (egcd.g !== 1n) {
+        throw new RangeError(`${a.toString()} does not have inverse modulo ${n.toString()}`); // modular inverse does not exist
+    }
+    else {
+        return toZn(egcd.x, n);
+    }
+}
+
+/**
+ * Modular exponentiation b**e mod n. Currently using the right-to-left binary method
+ *
+ * @param b base
+ * @param e exponent
+ * @param n modulo
+ *
+ * @throws {RangeError}
+ * Excpeption thrown when n is not > 0
+ *
+ * @returns b**e mod n
+ */
+function modPow(b, e, n) {
+    if (typeof b === 'number')
+        b = BigInt(b);
+    if (typeof e === 'number')
+        e = BigInt(e);
+    if (typeof n === 'number')
+        n = BigInt(n);
+    if (n <= 0n) {
+        throw new RangeError('n must be > 0');
+    }
+    else if (n === 1n) {
+        return 0n;
+    }
+    b = toZn(b, n);
+    if (e < 0n) {
+        return modInv(modPow(b, abs(e), n), n);
+    }
+    let r = 1n;
+    while (e > 0) {
+        if ((e % 2n) === 1n) {
+            r = r * b % n;
+        }
+        e = e / 2n;
+        b = b ** 2n % n;
+    }
+    return r;
+}
+
+export { abs, bitLength, eGcd, gcd, lcm, max, min, modInv, modPow, toZn };
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXNtLmpzIiwic291cmNlcyI6WyIuLi8uLi9zcmMvdHMvYWJzLnRzIiwiLi4vLi4vc3JjL3RzL2JpdExlbmd0aC50cyIsIi4uLy4uL3NyYy90cy9lZ2NkLnRzIiwiLi4vLi4vc3JjL3RzL2djZC50cyIsIi4uLy4uL3NyYy90cy9sY20udHMiLCIuLi8uLi9zcmMvdHMvbWF4LnRzIiwiLi4vLi4vc3JjL3RzL21pbi50cyIsIi4uLy4uL3NyYy90cy90b1puLnRzIiwiLi4vLi4vc3JjL3RzL21vZEludi50cyIsIi4uLy4uL3NyYy90cy9tb2RQb3cudHMiXSwic291cmNlc0NvbnRlbnQiOm51bGwsIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7O1NBT2dCLEdBQUcsQ0FBRSxDQUFnQjtJQUNuQyxPQUFPLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUE7QUFDMUI7O0FDVEE7Ozs7OztTQU1nQixTQUFTLENBQUUsQ0FBZ0I7SUFDekMsSUFBSSxPQUFPLENBQUMsS0FBSyxRQUFRO1FBQUUsQ0FBQyxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQTtJQUV4QyxJQUFJLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFBRSxPQUFPLENBQUMsQ0FBQTtLQUFFO0lBQzFCLElBQUksSUFBSSxHQUFHLENBQUMsQ0FBQTtJQUNaLEdBQUc7UUFDRCxJQUFJLEVBQUUsQ0FBQTtLQUNQLFFBQVEsQ0FBQyxDQUFDLEtBQUssRUFBRSxJQUFJLEVBQUUsRUFBQztJQUN6QixPQUFPLElBQUksQ0FBQTtBQUNiOztBQ1ZBOzs7Ozs7Ozs7Ozs7U0FZZ0IsSUFBSSxDQUFFLENBQWdCLEVBQUUsQ0FBZ0I7SUFDdEQsSUFBSSxPQUFPLENBQUMsS0FBSyxRQUFRO1FBQUUsQ0FBQyxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQTtJQUN4QyxJQUFJLE9BQU8sQ0FBQyxLQUFLLFFBQVE7UUFBRSxDQUFDLEdBQUcsTUFBTSxDQUFDLENBQUMsQ0FBQyxD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

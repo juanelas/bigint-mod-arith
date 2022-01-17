@@ -43,7 +43,7 @@ The absolute value of a
 
 #### Defined in
 
-[abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/abs.ts#L8)
+[abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/abs.ts#L8)
 
 ___
 
@@ -67,7 +67,7 @@ The bit length
 
 #### Defined in
 
-[bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/bitLength.ts#L7)
+[bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/bitLength.ts#L7)
 
 ___
 
@@ -96,7 +96,7 @@ A triple (g, x, y), such that ax + by = g = gcd(a, b).
 
 #### Defined in
 
-[egcd.ts:18](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/egcd.ts#L18)
+[egcd.ts:18](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/egcd.ts#L18)
 
 ___
 
@@ -121,7 +121,7 @@ The greatest common divisor of a and b
 
 #### Defined in
 
-[gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/gcd.ts#L10)
+[gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/gcd.ts#L10)
 
 ___
 
@@ -146,7 +146,7 @@ The least common multiple of a and b
 
 #### Defined in
 
-[lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/lcm.ts#L10)
+[lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/lcm.ts#L10)
 
 ___
 
@@ -171,7 +171,7 @@ Maximum of numbers a and b
 
 #### Defined in
 
-[max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/max.ts#L9)
+[max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/max.ts#L9)
 
 ___
 
@@ -196,7 +196,7 @@ Minimum of numbers a and b
 
 #### Defined in
 
-[min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/min.ts#L9)
+[min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/min.ts#L9)
 
 ___
 
@@ -224,7 +224,7 @@ The inverse modulo n
 
 #### Defined in
 
-[modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/modInv.ts#L14)
+[modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/modInv.ts#L14)
 
 ___
 
@@ -253,7 +253,7 @@ b**e mod n
 
 #### Defined in
 
-[modPow.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/modPow.ts#L16)
+[modPow.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/modPow.ts#L16)
 
 ___
 
@@ -284,4 +284,4 @@ A bigint with the smallest positive representation of a modulo n
 
 #### Defined in
 
-[toZn.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/5b2686b/src/ts/toZn.ts#L15)
+[toZn.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/09f1243/src/ts/toZn.ts#L15)
