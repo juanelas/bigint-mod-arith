@@ -1,11 +1,10 @@
-'use strict'
+import fs from 'fs'
+import TypeDoc from 'typedoc'
+import path from 'path'
 
-const fs = require('fs')
-const TypeDoc = require('typedoc')
-const path = require('path')
-const pkgJson = require('../package.json')
+const pkgJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
 
-const rootDir = path.join(__dirname, '..')
+const rootDir = new URL('../', import.meta.url).pathname
 
 function camelise (str) {
   return str.replace(/-([a-z])/g,
