@@ -5,8 +5,10 @@ const path = require('path')
 const chai = require('chai')
 const rimraf = require('rimraf')
 
-const RollupBuilder = require('./builders/RollupBuilder.js')
-const TestsBuilder = require('./builders/TestsBuilder.js')
+const RollupBuilder = require('./builders/RollupBuilder.cjs')
+const TestsBuilder = require('./builders/TestsBuilder.cjs')
+
+require('dotenv').config()
 
 const rootDir = path.join(__dirname, '../../../')
 

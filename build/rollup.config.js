@@ -108,16 +108,16 @@ export default [
       typescriptPlugin(tsBundleOptions),
       resolve({
         browser: true,
-        exportConditions: ['browser', 'module', 'import', 'default'],
-        mainFields: ['browser', 'module', 'main']
+        exportConditions: ['browser', 'default'],
+        mainFields: ['browser', 'main']
       }),
       commonjs({
-        namedExports: {
-          'bn.js': ['BN'],
-          'hash.js': ['hmac', 'ripemd160', 'sha256', 'sha512'],
-          elliptic: ['ec'],
-          'scrypt-js': ['scrypt', 'syncScrypt']
-        }
+        // namedExports: {
+        //   'bn.js': ['BN'],
+        //   'hash.js': ['hmac', 'ripemd160', 'sha256', 'sha512'],
+        //   elliptic: ['ec'],
+        //   'scrypt-js': ['scrypt', 'syncScrypt']
+        // }
       }),
       json()
     ]

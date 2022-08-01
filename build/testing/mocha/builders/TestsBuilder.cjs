@@ -4,7 +4,7 @@ const fs = require('fs')
 const ts = require('typescript')
 const JSON5 = require('json5')
 
-const Builder = require('./Builder.js')
+const Builder = require('./Builder.cjs')
 
 const rootDir = path.join(__dirname, '../../../../')
 const mochaTsRelativeDir = '.mocha-ts'
