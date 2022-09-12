@@ -1,5 +1,5 @@
 /**
- * Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<=b
+ * Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<b
  *
  * @param a
  * @param b

@@ -43,7 +43,7 @@ The absolute value of a
 
 #### Defined in
 
-[abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/abs.ts#L8)
+[abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/abs.ts#L8)
 
 ___
 
@@ -67,7 +67,7 @@ The bit length
 
 #### Defined in
 
-[bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/bitLength.ts#L7)
+[bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/bitLength.ts#L7)
 
 ___
 
@@ -80,7 +80,7 @@ Take positive integers a, b as input, and return a triple (g, x, y), such that a
 
 **`Throws`**
 
-This excepction is thrown if a or b are less than 0
+RangeError if a or b are <= 0
 
 #### Parameters
 
@@ -97,7 +97,7 @@ A triple (g, x, y), such that ax + by = g = gcd(a, b).
 
 #### Defined in
 
-[egcd.ts:18](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/egcd.ts#L18)
+[egcd.ts:17](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/egcd.ts#L17)
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 ▸ **gcd**(`a`, `b`): `bigint`
 
-Greatest-common divisor of two integers based on the iterative binary algorithm.
+Greatest common divisor of two integers based on the iterative binary algorithm.
 
 #### Parameters
 
@@ -122,7 +122,7 @@ The greatest common divisor of a and b
 
 #### Defined in
 
-[gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/gcd.ts#L10)
+[gcd.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/gcd.ts#L10)
 
 ___
 
@@ -147,7 +147,7 @@ The least common multiple of a and b
 
 #### Defined in
 
-[lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/lcm.ts#L10)
+[lcm.ts:10](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/lcm.ts#L10)
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 ▸ **max**(`a`, `b`): `number` \| `bigint`
 
-Maximum. max(a,b)==a if a>=b. max(a,b)==b if a<=b
+Maximum. max(a,b)==a if a>=b. max(a,b)==b if a<b
 
 #### Parameters
 
@@ -172,7 +172,7 @@ Maximum of numbers a and b
 
 #### Defined in
 
-[max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/max.ts#L9)
+[max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/max.ts#L9)
 
 ___
 
@@ -180,7 +180,7 @@ ___
 
 ▸ **min**(`a`, `b`): `number` \| `bigint`
 
-Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<=b
+Minimum. min(a,b)==b if a>=b. min(a,b)==a if a<b
 
 #### Parameters
 
@@ -197,7 +197,7 @@ Minimum of numbers a and b
 
 #### Defined in
 
-[min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/min.ts#L9)
+[min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/min.ts#L9)
 
 ___
 
@@ -209,7 +209,7 @@ Modular inverse.
 
 **`Throws`**
 
-Excpeption thorwn when a does not have inverse modulo n
+RangeError if a does not have inverse modulo n
 
 #### Parameters
 
@@ -226,7 +226,7 @@ The inverse modulo n
 
 #### Defined in
 
-[modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/modInv.ts#L14)
+[modInv.ts:13](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/modInv.ts#L13)
 
 ___
 
@@ -238,7 +238,7 @@ Modular exponentiation b**e mod n. Currently using the right-to-left binary meth
 
 **`Throws`**
 
-Excpeption thrown when n is not > 0
+RangeError if n <= 0
 
 #### Parameters
 
@@ -256,7 +256,7 @@ b**e mod n
 
 #### Defined in
 
-[modPow.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/modPow.ts#L16)
+[modPow.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/modPow.ts#L15)
 
 ___
 
@@ -272,7 +272,7 @@ a and b must be the same type, either number or bigint
 
 **`Throws`**
 
-Excpeption thrown when n is not > 0
+RangeError if n <= 0
 
 #### Parameters
 
@@ -289,4 +289,4 @@ A bigint with the smallest positive representation of a modulo n
 
 #### Defined in
 
-[toZn.ts:15](https://github.com/juanelas/bigint-mod-arith/blob/905ba66/src/ts/toZn.ts#L15)
+[toZn.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/723a418/src/ts/toZn.ts#L14)

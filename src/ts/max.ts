@@ -1,5 +1,5 @@
 /**
- * Maximum. max(a,b)==a if a>=b. max(a,b)==b if a<=b
+ * Maximum. max(a,b)==a if a>=b. max(a,b)==b if a<b
  *
  * @param a
  * @param b

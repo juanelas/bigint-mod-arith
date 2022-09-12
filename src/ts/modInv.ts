@@ -6,8 +6,7 @@ import { toZn } from './toZn'
  * @param a The number to find an inverse for
  * @param n The modulo
  *
- * @throws {RangeError}
- * Excpeption thorwn when a does not have inverse modulo n
+ * @throws {@link RangeError} if a does not have inverse modulo n
  *
  * @returns The inverse modulo n
  */

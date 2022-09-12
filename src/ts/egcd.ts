@@ -10,8 +10,7 @@ export interface Egcd {
  * @param a
  * @param b
  *
- * @throws {RangeError}
- * This excepction is thrown if a or b are less than 0
+ * @throws {@link RangeError} if a or b are <= 0
  *
  * @returns A triple (g, x, y), such that ax + by = g = gcd(a, b).
  */

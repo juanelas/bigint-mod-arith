@@ -8,8 +8,7 @@ import { toZn } from './toZn'
  * @param e exponent
  * @param n modulo
  *
- * @throws {RangeError}
- * Excpeption thrown when n is not > 0
+ * @throws {@link RangeError} if n <= 0
  *
  * @returns b**e mod n
  */

@@ -7,8 +7,7 @@
  * @param a - An integer
  * @param n - The modulo
  *
- * @throws {RangeError}
- * Excpeption thrown when n is not > 0
+ * @throws {@link RangeError} if n <= 0
  *
  * @returns A bigint with the smallest positive representation of a modulo n
  */

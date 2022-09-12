@@ -1,5 +1,5 @@
 /**
- * Greatest-common divisor of two integers based on the iterative binary algorithm.
+ * Greatest common divisor of two integers based on the iterative binary algorithm.
  *
  * @param a
  * @param b
