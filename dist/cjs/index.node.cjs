@@ -14,7 +14,7 @@ function abs(a) {
 }
 
 /**
- * Returns the bitlength of a number
+ * Returns the (minimum) length of a number expressed in bits.
  *
  * @param a
  * @returns The bit length

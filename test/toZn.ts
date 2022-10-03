@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('toZn', function () {
   const inputs = [
     {
@@ -26,7 +28,7 @@ describe('toZn', function () {
   for (const input of inputs) {
     describe(`toZn(${input.a}, ${input.n})`, function () {
       it(`should return ${input.toZn}`, function () {
-        const ret = _pkg.toZn(input.a, input.n)
+        const ret = bma.toZn(input.a, input.n)
         chai.expect(ret).to.equal(input.toZn)
       })
     })
@@ -35,7 +37,7 @@ describe('toZn', function () {
     describe(`toZn(${input.a}, ${input.n})`, function () {
       it('should throw RangeError', function () {
         try {
-          _pkg.toZn(input.a, input.n)
+          bma.toZn(input.a, input.n)
           throw new Error('should have failed')
         } catch (err) {
           chai.expect(err).to.be.instanceOf(RangeError)

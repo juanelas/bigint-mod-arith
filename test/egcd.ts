@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('egcd', function () {
   const inputs = [
     {
@@ -31,7 +33,7 @@ describe('egcd', function () {
   for (const input of inputs) {
     describe(`eGcd(${input.a}, ${input.b})`, function () {
       it('should return the egcd', function () {
-        const ret = _pkg.eGcd(input.a, input.b)
+        const ret = bma.eGcd(input.a, input.b)
         chai.expect(ret).to.eql(input.egcd)
       })
     })

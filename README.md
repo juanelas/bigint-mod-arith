@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Node.js CI](https://github.com/juanelas/bigint-mod-arith/workflows/build/badge.svg)](https://github.com/juanelas/bigint-mod-arith/actions?query=workflow%3A%22build%22)
+[![Node.js CI](https://github.com/juanelas/bigint-mod-arith/actions/workflows/nodejs.yml/badge.svg)](https://github.com/juanelas/bigint-mod-arith/actions/workflows/nodejs.yml)
 [![Coverage Status](https://coveralls.io/repos/github/juanelas/bigint-mod-arith/badge.svg?branch=master)](https://coveralls.io/github/juanelas/bigint-mod-arith?branch=master)
 
 # bigint-mod-arith
@@ -24,7 +24,7 @@ Then either require (Node.js CJS):
 const bigintModArith = require('bigint-mod-arith')
 ```
 
-> **Node >=10.4 <11**. `bigint-mod-arith` uses workers to speed up some operations. Workers are enabled by default with Node.js from version 11. In order to use them with Node >=10.4 and <11, you need to execute node with the flag `--experimental-worker`, and require the .js file manually (otherwise .cjs is required by default and would not be supported by the workers)
+> **Node >=10.4 <11**. `bigint-mod-arith` uses workers to speed up some operations. Workers are enabled by default with Node.js from version 11. In order to use them with Node >=10.4 and <11, you need to execute node with the flag `--experimental-worker`, and require the `.js` file manually (otherwise `.cjs` is required by default and would not be supported by the workers)
 >
 > ```javascript
 > const bigintCryptoUtils = require('bigint-crypto-utils/dist/cjs/index.node')  // ONLY FOR node >=10.4 <11 !

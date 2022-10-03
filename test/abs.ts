@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('abs', function () {
   const inputs = [
     {
@@ -20,7 +22,7 @@ describe('abs', function () {
   for (const input of inputs) {
     describe(`abs(${input.value})`, function () {
       it(`should return ${input.abs}`, function () {
-        const ret = _pkg.abs(input.value)
+        const ret = bma.abs(input.value)
         chai.expect(ret).to.equal(input.abs)
       })
     })

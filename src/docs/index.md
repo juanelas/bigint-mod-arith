@@ -23,7 +23,7 @@ Then either require (Node.js CJS):
 const {{PKG_CAMELCASE}} = require('{{PKG_NAME}}')
 ```
 
-> **Node >=10.4 <11**. `{{PKG_NAME}}` uses workers to speed up some operations. Workers are enabled by default with Node.js from version 11. In order to use them with Node >=10.4 and <11, you need to execute node with the flag `--experimental-worker`, and require the .js file manually (otherwise .cjs is required by default and would not be supported by the workers)
+> **Node >=10.4 <11**. `{{PKG_NAME}}` uses workers to speed up some operations. Workers are enabled by default with Node.js from version 11. In order to use them with Node >=10.4 and <11, you need to execute node with the flag `--experimental-worker`, and require the `.js` file manually (otherwise `.cjs` is required by default and would not be supported by the workers)
 >
 > ```javascript
 > const bigintCryptoUtils = require('bigint-crypto-utils/dist/cjs/index.node')  // ONLY FOR node >=10.4 <11 !
@@ -52,11 +52,11 @@ const a = BigInt('5')
 const b = BigInt('2')
 const n = 19n
 
-console.log(bigintModArith.modPow(a, b, n)) // prints 6
+console.log({{PKG_CAMELCASE}}.modPow(a, b, n)) // prints 6
 
-console.log(bigintModArith.modInv(2n, 5n)) // prints 3
+console.log({{PKG_CAMELCASE}}.modInv(2n, 5n)) // prints 3
 
-console.log(bigintModArith.modInv(BigInt('3'), BigInt('5'))) // prints 2
+console.log({{PKG_CAMELCASE}}.modInv(BigInt('3'), BigInt('5'))) // prints 2
 ```
 
 ## API reference documentation

@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('modInv', function () {
   const inputs = [
     {
@@ -33,7 +35,7 @@ describe('modInv', function () {
   for (const input of inputs) {
     describe(`modInv(${input.a}, ${input.n})`, function () {
       it(`should return ${input.modInv}`, function () {
-        const ret = _pkg.modInv(input.a, input.n)
+        const ret = bma.modInv(input.a, input.n)
         // chai.assert( String(ret) === String(input.modInv) );
         chai.expect(String(ret)).to.be.equal(String(input.modInv))
       })
@@ -43,7 +45,7 @@ describe('modInv', function () {
     describe(`modInv(${input.a}, ${input.n})`, function () {
       it('should throw RangeError', function () {
         try {
-          _pkg.modInv(input.a, input.n)
+          bma.modInv(input.a, input.n)
           throw new Error('should have failed')
         } catch (err) {
           chai.expect(err).to.be.instanceOf(RangeError)

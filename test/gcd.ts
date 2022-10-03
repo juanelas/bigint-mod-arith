@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('gcd', function () {
   const inputs = [
     {
@@ -49,7 +51,7 @@ describe('gcd', function () {
   for (const input of inputs) {
     describe(`gcd(${input.a}, ${input.b})`, function () {
       it(`should return ${input.gcd}`, function () {
-        const ret = _pkg.gcd(input.a, input.b)
+        const ret = bma.gcd(input.a, input.b)
         chai.expect(ret).to.equal(input.gcd)
       })
     })

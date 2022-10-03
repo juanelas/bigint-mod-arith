@@ -6,10 +6,13 @@ module.exports = class Builder extends EventEmitter {
   constructor (semaphoreFile, name = 'builder') {
     super()
     this.name = name
-    this.firstBuild = true
     fs.mkdirSync(path.dirname(semaphoreFile), { recursive: true })
 
     this.semaphoreFile = semaphoreFile
+    if (!fs.existsSync(this.semaphoreFile)) {
+      fs.writeFileSync(this.semaphoreFile, '', { encoding: 'utf8' })
+    }
+
     this._ready = false
 
     this.on('message', (...message) => {
@@ -24,12 +27,12 @@ module.exports = class Builder extends EventEmitter {
       }
     })
 
-    this.on('ready', () => {
-      if (this.firstBuild === false) {
-        fs.writeFileSync(this.semaphoreFile, '', 'utf-8')
-      } else {
-        this.firstBuild = false
+    this.on('ready', (updateSemaphore = true) => {
+      const now = Date.now()
+      if (updateSemaphore) {
+        fs.utimesSync(this.semaphoreFile, now, now)
       }
+
       this._ready = true
     })
 

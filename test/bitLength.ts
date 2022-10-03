@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('bitLength', function () {
   const inputs = [
     {
@@ -21,7 +23,7 @@ describe('bitLength', function () {
   for (const input of inputs) {
     describe(`bitLength(${input.value})`, function () {
       it(`should return ${input.bitLength}`, function () {
-        const ret = _pkg.bitLength(input.value)
+        const ret = bma.bitLength(input.value)
         chai.expect(ret).to.equal(input.bitLength)
       })
     })

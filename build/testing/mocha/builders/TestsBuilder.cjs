@@ -2,12 +2,15 @@ const path = require('path')
 const fs = require('fs')
 
 const ts = require('typescript')
-const JSON5 = require('json5')
+const json5 = require('json5')
 
 const Builder = require('./Builder.cjs')
 
 const rootDir = path.join(__dirname, '../../../../')
-const mochaTsRelativeDir = '.mocha-ts'
+
+const pkgJson = require(path.join(rootDir, 'package.json'))
+
+const mochaTsRelativeDir = pkgJson.directories['mocha-ts']
 const mochaTsDir = path.join(rootDir, mochaTsRelativeDir)
 
 const formatHost = {
@@ -16,23 +19,65 @@ const formatHost = {
   getNewLine: () => ts.sys.newLine
 }
 
-module.exports = class TestsBuilder extends Builder {
-  constructor ({ name = 'tsc', configPath = path.join(rootDir, 'tsconfig.json'), tempDir = mochaTsDir }) {
-    super(path.join(tempDir, 'semaphore'), name)
+function fileChecksum (filePath) {
+  return require('crypto')
+    .createHash('md5')
+    .update(fs.readFileSync(filePath, { encoding: 'utf-8' }), 'utf8')
+    .digest('hex')
+}
 
-    if (fs.existsSync(configPath) !== true) throw new Error(`Couldn't find a tsconfig file at ${configPath}`)
+function renameJsToCjs (dir, fileList = []) {
+  const files = fs.readdirSync(dir)
+
+  files.forEach(file => {
+    if (fs.statSync(path.join(dir, file)).isDirectory()) {
+      fileList = renameJsToCjs(path.join(dir, file), fileList)
+    } else {
+      const match = file.match(/(.*)\.js$/)
+      if (match !== null) {
+        const filename = match[1]
+        fs.renameSync(path.join(dir, file), path.join(dir, `${filename}.cjs`))
+      }
+    }
+  })
+}
+
+class TestsBuilder extends Builder {
+  constructor ({ name, configPath, tempDir }) {
+    super(path.join(tempDir, 'semaphore'), name)
 
     this.tempDir = tempDir
 
-    const tsConfig = JSON5.parse(fs.readFileSync(configPath, 'utf8'))
+    if (fs.existsSync(configPath) !== true) throw new Error(`Couldn't find a tsconfig file at ${configPath}`)
 
-    tsConfig.file = undefined
+    this.tsConfigPath = configPath
 
-    // Exclude already transpiled files in src
-    tsConfig.exclude = ['src/ts/**/!(*.spec).ts']
+    this.testFilesChecksums = {}
+  }
 
+  async start ({ testFiles = [], commonjs = false }) {
+    await super.start()
+
+    this.commonjs = commonjs
+
+    const tsConfig = json5.parse(fs.readFileSync(this.tsConfigPath, 'utf8'))
+
+    if (testFiles.length > 0) {
+      delete tsConfig.files
+      tsConfig.include = ['build/typings/**/*.d.ts'].concat(testFiles)
+      for (let i = 0; i < testFiles.length; i++) {
+        this.testFilesChecksums[testFiles[i]] = fileChecksum(testFiles[i])
+      }
+    } else {
+      tsConfig.include = ['build/typings/**/*.d.ts', 'test/**/*', 'src/ts/**/*.spec.ts']
+    }
+    tsConfig.exclude = ['src/ts/**/!(.spec).ts']
+
+    if (this.commonjs) {
+      tsConfig.compilerOptions.module = 'commonjs'
+    }
     // "noResolve": true
-    tsConfig.compilerOptions.noResolve = false
+    // tsConfig.compilerOptions.noResolve = true
 
     // we don't need declaration files
     tsConfig.compilerOptions.declaration = false
@@ -41,25 +86,24 @@ module.exports = class TestsBuilder extends Builder {
     tsConfig.compilerOptions.noEmit = false
 
     // source mapping eases debuging
-    tsConfig.compilerOptions.sourceMap = true
+    tsConfig.compilerOptions.inlineSourceMap = true
 
-    // This prevents SyntaxError: Cannot use import statement outside a module
-    tsConfig.compilerOptions.module = 'commonjs'
+    tsConfig.compilerOptions.rootDir = '.'
 
     // Removed typeroots (it causes issues)
     tsConfig.compilerOptions.typeRoots = undefined
 
-    tsConfig.compilerOptions.outDir = path.isAbsolute(tempDir) ? path.relative(rootDir, tempDir) : tempDir
+    tsConfig.compilerOptions.outDir = path.isAbsolute(this.tempDir) ? path.relative(rootDir, this.tempDir) : this.tempDir
 
     this.tempTsConfigPath = path.join(rootDir, '.tsconfig.json')
 
-    fs.writeFileSync(this.tempTsConfigPath, JSON.stringify(tsConfig, undefined, 2))
+    fs.writeFileSync(this.tempTsConfigPath, JSON.stringify(tsConfig, undefined, 2), { encoding: 'utf-8' })
 
     const createProgram = ts.createSemanticDiagnosticsBuilderProgram
 
     const reportDiagnostic = (diagnostic) => {
       const filePath = path.relative(rootDir, diagnostic.file.fileName)
-      const tranpiledJsPath = `${path.join(tempDir, filePath).slice(0, -3)}.js`
+      const tranpiledJsPath = `${path.join(this.tempDir, filePath).slice(0, -3)}.js`
       const errorLine = diagnostic.file.text.slice(0, diagnostic.start).split(/\r\n|\r|\n/).length
       if (fs.existsSync(tranpiledJsPath)) {
         fs.writeFileSync(tranpiledJsPath, '', 'utf8')
@@ -69,7 +113,19 @@ module.exports = class TestsBuilder extends Builder {
 
     const reportWatchStatusChanged = (diagnostic, newLine, options, errorCount) => {
       if (errorCount !== undefined) {
-        this.emit('ready')
+        // only change semaphore if test files are modified
+        let updateSemaphore = false
+        for (let i = 0; i < testFiles.length; i++) {
+          const checksum = fileChecksum(testFiles[i])
+          if (this.testFilesChecksums[testFiles[i]] !== checksum) {
+            updateSemaphore = true
+            this.testFilesChecksums[testFiles[i]] = checksum
+          }
+        }
+        if (this.commonjs) {
+          renameJsToCjs(mochaTsDir)
+        }
+        this.emit('ready', updateSemaphore)
       } else {
         this.emit('busy')
         if (diagnostic.code === 6031) {
@@ -90,13 +146,11 @@ module.exports = class TestsBuilder extends Builder {
       reportDiagnostic,
       reportWatchStatusChanged
     )
-  }
 
-  async start () {
-    await super.start()
     // `createWatchProgram` creates an initial program, watches files, and updates
     // the program over time.
     this.watcher = ts.createWatchProgram(this.host)
+    this.watcher.getProgram()
     return await this.ready()
   }
 
@@ -106,3 +160,10 @@ module.exports = class TestsBuilder extends Builder {
     fs.unlinkSync(this.tempTsConfigPath)
   }
 }
+
+exports.TestsBuilder = TestsBuilder
+exports.testBuilder = new TestsBuilder({
+  name: 'tsc',
+  configPath: path.join(rootDir, 'tsconfig.json'),
+  tempDir: mochaTsDir
+})

@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('min', function () {
   const inputs = [
     {
@@ -76,7 +78,7 @@ describe('min', function () {
   for (const input of inputs) {
     describe(`min(${input.value[0]}, ${input.value[1]})`, function () {
       it(`should return ${input.min}`, function () {
-        const ret = _pkg.min(input.value[0], input.value[1])
+        const ret = bma.min(input.value[0], input.value[1])
         chai.expect(ret).to.equal(input.min)
       })
     })

@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('lcm', function () {
   const inputs = [
     {
@@ -34,7 +36,7 @@ describe('lcm', function () {
   for (const input of inputs) {
     describe(`lcm(${input.a}, ${input.b})`, function () {
       it(`should return ${input.lcm}`, function () {
-        const ret = _pkg.lcm(input.a, input.b)
+        const ret = bma.lcm(input.a, input.b)
         chai.expect(ret).to.equal(input.lcm)
       })
     })

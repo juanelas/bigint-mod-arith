@@ -1,3 +1,5 @@
+import * as bma from '#pkg'
+
 describe('max', function () {
   const inputs = [
     {
@@ -76,7 +78,7 @@ describe('max', function () {
   for (const input of inputs) {
     describe(`max(${input.value[0]}, ${input.value[1]})`, function () {
       it(`should return ${input.max}`, function () {
-        const ret = _pkg.max(input.value[0], input.value[1])
+        const ret = bma.max(input.value[0], input.value[1])
         chai.expect(ret).to.equal(input.max)
       })
     })
