@@ -5,6 +5,6 @@
  *
  * @returns The absolute value of a
  */
-export function abs (a: number|bigint): number|bigint {
+export function abs (a: number | bigint): number | bigint {
   return (a >= 0) ? a : -a
 }

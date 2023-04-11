@@ -1,4 +1,4 @@
-import { abs } from './abs'
+import { abs } from './abs.js'
 /**
  * Greatest common divisor of two integers based on the iterative binary algorithm.
  *
@@ -7,7 +7,7 @@ import { abs } from './abs'
  *
  * @returns The greatest common divisor of a and b
  */
-export function gcd (a: number|bigint, b: number|bigint): bigint {
+export function gcd (a: number | bigint, b: number | bigint): bigint {
   let aAbs = (typeof a === 'number') ? BigInt(abs(a)) : abs(a) as bigint
   let bAbs = (typeof b === 'number') ? BigInt(abs(b)) : abs(b) as bigint
 

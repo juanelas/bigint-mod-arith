@@ -14,7 +14,7 @@ export interface Egcd {
  *
  * @returns A triple (g, x, y), such that ax + by = g = gcd(a, b).
  */
-export function eGcd (a: number|bigint, b: number|bigint): Egcd {
+export function eGcd (a: number | bigint, b: number | bigint): Egcd {
   if (typeof a === 'number') a = BigInt(a)
   if (typeof b === 'number') b = BigInt(b)
 
@@ -39,7 +39,7 @@ export function eGcd (a: number|bigint, b: number|bigint): Egcd {
   }
   return {
     g: b,
-    x: x,
-    y: y
+    x,
+    y
   }
 }

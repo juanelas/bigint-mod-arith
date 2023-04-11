@@ -1,6 +1,6 @@
-import { abs } from './abs'
-import { modInv } from './modInv'
-import { toZn } from './toZn'
+import { abs } from './abs.js'
+import { modInv } from './modInv.js'
+import { toZn } from './toZn.js'
 /**
  * Modular exponentiation b**e mod n. Currently using the right-to-left binary method
  *
@@ -12,7 +12,7 @@ import { toZn } from './toZn'
  *
  * @returns b**e mod n
  */
-export function modPow (b: number|bigint, e: number|bigint, n: number|bigint): bigint {
+export function modPow (b: number | bigint, e: number | bigint, n: number | bigint): bigint {
   if (typeof b === 'number') b = BigInt(b)
   if (typeof e === 'number') e = BigInt(e)
   if (typeof n === 'number') n = BigInt(n)

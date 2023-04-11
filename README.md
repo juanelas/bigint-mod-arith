@@ -1,8 +1,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Node.js CI](https://github.com/juanelas/bigint-mod-arith/actions/workflows/nodejs.yml/badge.svg)](https://github.com/juanelas/bigint-mod-arith/actions/workflows/nodejs.yml)
-[![Coverage Status](https://coveralls.io/repos/github/juanelas/bigint-mod-arith/badge.svg?branch=master)](https://coveralls.io/github/juanelas/bigint-mod-arith?branch=master)
+[![Node.js CI](https://github.com/juanelas/bigint-mod-arith/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/juanelas/bigint-mod-arith/actions/workflows/build-and-test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/juanelas/bigint-mod-arith/badge.svg?branch=main)](https://coveralls.io/github/juanelas/bigint-mod-arith?branch=main)
 
 # bigint-mod-arith
 
@@ -38,7 +38,7 @@ import * as bigintModArith from 'bigint-mod-arith'
 
 The appropriate version for browser or node is automatically exported.
 
-You can also download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/iife.js), the [ESM bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/esm.min.js) or the [UMD bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/master/dist/bundles/umd.js) and manually add it to your project, or, if you have already imported `bigint-mod-arith` to your project, just get the bundles from `node_modules/bigint-mod-arith/dist/bundles/`.
+You can also download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundles/iife.js), the [ESM bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundles/esm.min.js) or the [UMD bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundles/umd.js) and manually add it to your project, or, if you have already imported `bigint-mod-arith` to your project, just get the bundles from `node_modules/bigint-mod-arith/dist/bundles/`.
 
 An example of usage could be:
 

@@ -1,5 +1,5 @@
-import { abs } from './abs'
-import { gcd } from './gcd'
+import { abs } from './abs.js'
+import { gcd } from './gcd.js'
 /**
  * The least common multiple computed as abs(a*b)/gcd(a,b)
  * @param a
@@ -7,7 +7,7 @@ import { gcd } from './gcd'
  *
  * @returns The least common multiple of a and b
  */
-export function lcm (a: number|bigint, b: number|bigint): bigint {
+export function lcm (a: number | bigint, b: number | bigint): bigint {
   if (typeof a === 'number') a = BigInt(a)
   if (typeof b === 'number') b = BigInt(b)
 

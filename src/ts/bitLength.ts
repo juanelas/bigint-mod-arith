@@ -4,7 +4,7 @@
  * @param a
  * @returns The bit length
  */
-export function bitLength (a: number|bigint): number {
+export function bitLength (a: number | bigint): number {
   if (typeof a === 'number') a = BigInt(a)
 
   if (a === 1n) { return 1 }

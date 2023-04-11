@@ -1,5 +1,5 @@
-import { eGcd } from './egcd'
-import { toZn } from './toZn'
+import { eGcd } from './egcd.js'
+import { toZn } from './toZn.js'
 /**
  * Modular inverse.
  *
@@ -10,7 +10,7 @@ import { toZn } from './toZn'
  *
  * @returns The inverse modulo n
  */
-export function modInv (a: number|bigint, n: number|bigint): bigint {
+export function modInv (a: number | bigint, n: number | bigint): bigint {
   const egcd = eGcd(toZn(a, n), n)
   if (egcd.g !== 1n) {
     throw new RangeError(`${a.toString()} does not have inverse modulo ${n.toString()}`) // modular inverse does not exist

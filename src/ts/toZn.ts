@@ -11,7 +11,7 @@
  *
  * @returns A bigint with the smallest positive representation of a modulo n
  */
-export function toZn (a: number|bigint, n: number|bigint): bigint {
+export function toZn (a: number | bigint, n: number | bigint): bigint {
   if (typeof a === 'number') a = BigInt(a)
   if (typeof n === 'number') n = BigInt(n)
 

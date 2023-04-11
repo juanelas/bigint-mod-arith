@@ -4,13 +4,13 @@
  * @packageDocumentation
  */
 
-export { abs } from './abs'
-export { bitLength } from './bitLength'
-export { Egcd, eGcd } from './egcd'
-export { gcd } from './gcd'
-export { lcm } from './lcm'
-export { max } from './max'
-export { min } from './min'
-export { modInv } from './modInv'
-export { modPow } from './modPow'
-export { toZn } from './toZn'
+export { abs } from './abs.js'
+export { bitLength } from './bitLength.js'
+export { Egcd, eGcd } from './egcd.js'
+export { gcd } from './gcd.js'
+export { lcm } from './lcm.js'
+export { max } from './max.js'
+export { min } from './min.js'
+export { modInv } from './modInv.js'
+export { modPow } from './modPow.js'
+export { toZn } from './toZn.js'

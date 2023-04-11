@@ -6,6 +6,6 @@
  *
  * @returns Maximum of numbers a and b
  */
-export function max (a: number|bigint, b: number|bigint): number|bigint {
+export function max (a: number | bigint, b: number | bigint): number | bigint {
   return (a >= b) ? a : b
 }
