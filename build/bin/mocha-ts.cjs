@@ -2,7 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
-const minimatch = require('minimatch')
+const minimatch = require('minimatch').minimatch
 const rimraf = require('rimraf')
 const runScript = require('../run-script.cjs')
 
@@ -58,9 +58,11 @@ function parse () {
     process.exit(1)
   }
 
-  let testsGlob = (args.pop() ?? '').replace(/^['"]/, '').replace(/['"]$/, '') // Let us remove surrounding quotes in string (it gives issues in windows)
-  if (testsGlob === '') {
+  let testsGlob = args.pop()
+  if (testsGlob === undefined) {
     testsGlob = '{src/ts/**/*.spec.ts,test/**/*.ts}'
+  } else {
+    testsGlob = testsGlob.replace(/^['"]/, '').replace(/['"]$/, '') // Let us remove surrounding quotes in string (it gives issues in windows)
   }
 
   const mochaArgs = []

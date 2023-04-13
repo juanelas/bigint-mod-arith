@@ -38,7 +38,7 @@ import * as bigintModArith from 'bigint-mod-arith'
 
 The appropriate version for browser or node is automatically exported.
 
-You can also download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundles/iife.js), the [ESM bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundles/esm.min.js) or the [UMD bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundles/umd.js) and manually add it to your project, or, if you have already imported `bigint-mod-arith` to your project, just get the bundles from `node_modules/bigint-mod-arith/dist/bundles/`.
+You can also download the [IIFE bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundle.iife.js), the [ESM bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundle.esm.min.js) or the [UMD bundle](https://raw.githubusercontent.com/juanelas/bigint-mod-arith/main/dist/bundle.umd.js) and manually add it to your project, or, if you have already imported `bigint-mod-arith` to your project, just get the bundles from `node_modules/bigint-mod-arith/dist/bundles/`.
 
 An example of usage could be:
 
