@@ -1,4 +1,4 @@
-# bigint-mod-arith - v3.2.1
+# bigint-mod-arith - v3.3.0
 
 Some common functions for modular arithmetic using native JS implementation of BigInt
 
@@ -39,7 +39,7 @@ Some common functions for modular arithmetic using native JS implementation of B
 
 #### Defined in
 
-[modPow.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/modPow.ts#L8)
+[modPow.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/modPow.ts#L8)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[phi.ts:1](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/phi.ts#L1)
+[phi.ts:1](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/phi.ts#L1)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[modPow.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/modPow.ts#L7)
+[modPow.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/modPow.ts#L7)
 
 ## Functions
 
@@ -83,7 +83,7 @@ The absolute value of a
 
 #### Defined in
 
-[abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/abs.ts#L8)
+[abs.ts:8](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/abs.ts#L8)
 
 ___
 
@@ -107,7 +107,7 @@ The bit length
 
 #### Defined in
 
-[bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/bitLength.ts#L7)
+[bitLength.ts:7](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/bitLength.ts#L7)
 
 ___
 
@@ -137,7 +137,7 @@ x
 
 #### Defined in
 
-[crt.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/crt.ts#L16)
+[crt.ts:16](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/crt.ts#L16)
 
 ___
 
@@ -167,7 +167,7 @@ A triple (g, x, y), such that ax + by = g = gcd(a, b).
 
 #### Defined in
 
-[egcd.ts:17](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/egcd.ts#L17)
+[egcd.ts:17](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/egcd.ts#L17)
 
 ___
 
@@ -192,7 +192,7 @@ The greatest common divisor of a and b
 
 #### Defined in
 
-[gcd.ts:11](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/gcd.ts#L11)
+[gcd.ts:11](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/gcd.ts#L11)
 
 ___
 
@@ -217,7 +217,7 @@ The least common multiple of a and b
 
 #### Defined in
 
-[lcm.ts:11](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/lcm.ts#L11)
+[lcm.ts:11](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/lcm.ts#L11)
 
 ___
 
@@ -242,7 +242,7 @@ Maximum of numbers a and b
 
 #### Defined in
 
-[max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/max.ts#L9)
+[max.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/max.ts#L9)
 
 ___
 
@@ -267,7 +267,7 @@ Minimum of numbers a and b
 
 #### Defined in
 
-[min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/min.ts#L9)
+[min.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/min.ts#L9)
 
 ___
 
@@ -292,7 +292,7 @@ The smallest positive integer that is congruent with (a_1 + ... + a_r) mod n
 
 #### Defined in
 
-[modAdd.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/modAdd.ts#L9)
+[modAdd.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/modAdd.ts#L9)
 
 ___
 
@@ -321,7 +321,7 @@ The inverse modulo n
 
 #### Defined in
 
-[modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/modInv.ts#L14)
+[modInv.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/modInv.ts#L14)
 
 ___
 
@@ -347,7 +347,7 @@ The smallest positive integer that is congruent with (a_1 * ... * a_r) mod n
 
 #### Defined in
 
-[modMultiply.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/modMultiply.ts#L9)
+[modMultiply.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/modMultiply.ts#L9)
 
 ___
 
@@ -378,7 +378,7 @@ b**e mod n
 
 #### Defined in
 
-[modPow.ts:22](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/modPow.ts#L22)
+[modPow.ts:22](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/modPow.ts#L22)
 
 ___
 
@@ -402,7 +402,7 @@ phi((p1**k1)*(p2**k2)*...*(pr**kr))
 
 #### Defined in
 
-[phi.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/phi.ts#L9)
+[phi.ts:9](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/phi.ts#L9)
 
 ___
 
@@ -435,4 +435,4 @@ A bigint with the smallest positive representation of a modulo n
 
 #### Defined in
 
-[toZn.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/fbe007f/src/ts/toZn.ts#L14)
+[toZn.ts:14](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/toZn.ts#L14)
