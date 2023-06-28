@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[egcd.ts:2](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/egcd.ts#L2)
+[egcd.ts:2](https://github.com/juanelas/bigint-mod-arith/blob/75b3dcf/src/ts/egcd.ts#L2)
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 #### Defined in
 
-[egcd.ts:3](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/egcd.ts#L3)
+[egcd.ts:3](https://github.com/juanelas/bigint-mod-arith/blob/75b3dcf/src/ts/egcd.ts#L3)
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 #### Defined in
 
-[egcd.ts:4](https://github.com/juanelas/bigint-mod-arith/blob/06b32a3/src/ts/egcd.ts#L4)
+[egcd.ts:4](https://github.com/juanelas/bigint-mod-arith/blob/75b3dcf/src/ts/egcd.ts#L4)
