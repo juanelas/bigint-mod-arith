@@ -1,5 +1,6 @@
 import { eGcd } from './egcd.js'
 import { toZn } from './toZn.js'
+
 /**
  * Modular inverse.
  *

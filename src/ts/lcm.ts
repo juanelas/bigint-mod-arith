@@ -1,5 +1,6 @@
 import { abs } from './abs.js'
 import { gcd } from './gcd.js'
+
 /**
  * The least common multiple computed as abs(a*b)/gcd(a,b)
  * @param a

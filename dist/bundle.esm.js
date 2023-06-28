@@ -45,6 +45,41 @@ function eGcd(a, b) {
     };
 }
 
+function toZn(a, n) {
+    if (typeof a === 'number')
+        a = BigInt(a);
+    if (typeof n === 'number')
+        n = BigInt(n);
+    if (n <= 0n) {
+        throw new RangeError('n must be > 0');
+    }
+    const aZn = a % n;
+    return (aZn < 0n) ? aZn + n : aZn;
+}
+
+function modInv(a, n) {
+    const egcd = eGcd(toZn(a, n), n);
+    if (egcd.g !== 1n) {
+        throw new RangeError(`${a.toString()} does not have inverse modulo ${n.toString()}`);
+    }
+    else {
+        return toZn(egcd.x, n);
+    }
+}
+
+function crt(remainders, modulos, modulo) {
+    if (remainders.length !== modulos.length) {
+        throw new RangeError('The remainders and modulos arrays should have the same length');
+    }
+    const product = modulo ?? modulos.reduce((acc, val) => acc * val, 1n);
+    return modulos.reduce((sum, mod, index) => {
+        const partialProduct = product / mod;
+        const inverse = modInv(partialProduct, mod);
+        const toAdd = ((partialProduct * inverse) % product * remainders[index]) % product;
+        return toZn(sum + toAdd, product);
+    }, 0n);
+}
+
 function gcd(a, b) {
     let aAbs = (typeof a === 'number') ? BigInt(abs(a)) : abs(a);
     let bAbs = (typeof b === 'number') ? BigInt(abs(b)) : abs(b);
@@ -93,29 +128,25 @@ function min(a, b) {
     return (a >= b) ? b : a;
 }
 
-function toZn(a, n) {
-    if (typeof a === 'number')
-        a = BigInt(a);
-    if (typeof n === 'number')
-        n = BigInt(n);
-    if (n <= 0n) {
-        throw new RangeError('n must be > 0');
-    }
-    const aZn = a % n;
-    return (aZn < 0n) ? aZn + n : aZn;
+function modAdd(addends, n) {
+    const mod = BigInt(n);
+    const as = addends.map(a => BigInt(a) % mod);
+    return toZn(as.reduce((sum, a) => sum + a % mod, 0n), mod);
 }
 
-function modInv(a, n) {
-    const egcd = eGcd(toZn(a, n), n);
-    if (egcd.g !== 1n) {
-        throw new RangeError(`${a.toString()} does not have inverse modulo ${n.toString()}`);
-    }
-    else {
-        return toZn(egcd.x, n);
-    }
+function modMultiply(factors, n) {
+    const mod = BigInt(n);
+    const as = factors.map(a => BigInt(a) % mod);
+    return toZn(as.reduce((prod, a) => prod * a % mod, 1n), mod);
 }
 
-function modPow(b, e, n) {
+function phi(primeFactorization) {
+    return primeFactorization.map(v => (v[0] ** (v[1] - 1n)) * (v[0] - 1n)).reduce((prev, curr) => {
+        return curr * prev;
+    }, 1n);
+}
+
+function modPow(b, e, n, primeFactorization) {
     if (typeof b === 'number')
         b = BigInt(b);
     if (typeof e === 'number')
@@ -130,7 +161,10 @@ function modPow(b, e, n) {
     }
     b = toZn(b, n);
     if (e < 0n) {
-        return modInv(modPow(b, abs(e), n), n);
+        return modInv(modPow(b, abs(e), n, primeFactorization), n);
+    }
+    if (primeFactorization !== undefined) {
+        return modPowWithFactorization(b, e, n, primePowerArguments(primeFactorization));
     }
     let r = 1n;
     while (e > 0) {
@@ -142,5 +176,35 @@ function modPow(b, e, n) {
     }
     return r;
 }
+function primePowerArguments(primeFactors) {
+    const primePowers = {};
+    primeFactors.forEach((primeFactor) => {
+        if (typeof primeFactor === 'bigint' || typeof primeFactor === 'number') {
+            const key = String(primeFactor);
+            if (primePowers[key] === undefined) {
+                primePowers[key] = { p: BigInt(primeFactor), k: 1n };
+            }
+            else {
+                primePowers[key].k += 1n;
+            }
+        }
+        else {
+            const key = String(primeFactor[0]);
+            if (primePowers[key] === undefined) {
+                primePowers[key] = { p: BigInt(primeFactor[0]), k: BigInt(primeFactor[1]) };
+            }
+            else {
+                primePowers[key].k += BigInt(primeFactor[1]);
+            }
+        }
+    });
+    return Object.values(primePowers).map(val => [val.p, val.k]);
+}
+function modPowWithFactorization(b, e, n, primeFactorization) {
+    const mods = primeFactorization.map(v => v[0] ** v[1]);
+    const phis = primeFactorization.map(v => phi([v]));
+    const remainders = phis.map((phi, i) => modPow(b, e % phi, mods[i]));
+    return crt(remainders, mods, n);
+}
 
-export { abs, bitLength, eGcd, gcd, lcm, max, min, modInv, modPow, toZn };
+export { abs, bitLength, crt, eGcd, gcd, lcm, max, min, modAdd, modInv, modMultiply, modPow, phi, toZn };

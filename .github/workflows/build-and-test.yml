@@ -86,31 +86,31 @@ jobs:
         #   VARIABLE1: ${{ secrets.VARIABLE1 }}
         #   VARIABLE2: ${{ secrets.VARIABLE2 }}
 
-  publish:
-    needs: [nodetests, browsertests]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Git checkout
-        uses: actions/checkout@v3
+  # publish:
+  #   needs: [nodetests, browsertests]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Git checkout
+  #       uses: actions/checkout@v3
 
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
+  #     - name: Install Node.js, NPM and Yarn
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "18.x"
+  #         registry-url: "https://registry.npmjs.org"
 
-      - name: install
-        run: npm ci
+  #     # - name: install
+  #     #   run: npm ci
         
-      - name: coverage
-        run: npm run coverage
+  #     # - name: coverage
+  #     #   run: npm run coverage
 
-      - name: send report to coveralls.io
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+  #     # - name: send report to coveralls.io
+  #     #   uses: coverallsapp/github-action@master
+  #     #   with:
+  #     #     github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: NPM publish
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #     - name: NPM publish
+  #       run: npm publish --access public
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

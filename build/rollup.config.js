@@ -8,10 +8,10 @@ import replace from '@rollup/plugin-replace'
 import terser from '@rollup/plugin-terser'
 import rollupPluginTs from '@rollup/plugin-typescript'
 import { existsSync, readFileSync } from 'fs'
-import { dirname, join } from 'path'
+import { builtinModules } from 'module'
+import { join } from 'path'
 import dts from 'rollup-plugin-dts'
 import { compile } from './rollup-plugin-dts.js'
-import { builtinModules } from 'module'
 
 import * as url from 'url'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
@@ -45,7 +45,7 @@ if (existsSync(input) !== true) throw new Error('The entry point should be index
 const tsPluginOptions = {
   tsconfig: tsConfigPath,
   outDir: undefined,
-  include: ['src/ts/**/*', 'build/typings/is-browser.d.ts'],
+  include: ['src/ts/**/*', 'build/typings/**/*.d.ts'],
   exclude: ['src/**/*.spec.ts']
 }
 
@@ -100,7 +100,9 @@ export default [
     plugins: [
       replace({
         IS_BROWSER: true,
+        environment: 'browser',
         _MODULE_TYPE: "'ESM'",
+        _NPM_PKG_VERSION: `'${process.env.npm_package_version}'` ?? "'0.0.1'",
         preventAssignment: true
       }),
       rollupPluginTs(tsPluginOptions),
@@ -142,7 +144,9 @@ export default [
     plugins: [
       replace({
         IS_BROWSER: true,
+        environment: 'browser',
         _MODULE_TYPE: "'BUNDLE'",
+        _NPM_PKG_VERSION: `'${process.env.npm_package_version}'` ?? "'0.0.1'",
         preventAssignment: true
       }),
       rollupPluginTs({
@@ -162,20 +166,17 @@ export default [
         ...sourcemapOutputOptions,
         format: 'cjs',
         exports: 'auto',
-        plugins: [
-          terser()
-        ]
+        interop: 'auto',
+        dynamicImportInCjs: false,
+        plugins: [terser()]
       }
     ],
     plugins: [
       replace({
-        'await import(': 'require(',
-        delimiters: ['', ''],
-        preventAssignment: true
-      }),
-      replace({
         IS_BROWSER: false,
+        environment: 'nodejs',
         _MODULE_TYPE: "'CJS'",
+        _NPM_PKG_VERSION: `'${process.env.npm_package_version}'` ?? "'0.0.1'",
         preventAssignment: true
       }),
       rollupPluginTs(tsPluginOptions),
@@ -197,23 +198,24 @@ export default [
         file: join(rootDir, pkgJson.exports['.'].node.import.default),
         ...sourcemapOutputOptions,
         format: 'es',
-        plugins: [
-          terser()
-        ]
+        plugins: [terser()]
       }
     ],
     plugins: [
       replace({
         IS_BROWSER: false,
+        environment: 'nodejs',
         _MODULE_TYPE: "'ESM'",
-        __filename: `'${pkgJson.exports['.'].node.import.default}'`,
-        __dirname: `'${dirname(pkgJson.exports['.'].node.import.default)}'`,
+        _NPM_PKG_VERSION: `'${process.env.npm_package_version}'` ?? "'0.0.1'",
+        __filename: 'fileURLToPath(import.meta.url)',
+        __dirname: 'fileURLToPath(new URL(\'.\', import.meta.url))',
         preventAssignment: true
       }),
       rollupPluginTs(tsPluginOptions),
       compileDts(tmpDeclarationsDir),
       inject({
-        crypto: ['crypto', 'webcrypto']
+        crypto: ['crypto', 'webcrypto'],
+        fileURLToPath: ['url', 'fileURLToPath']
       }),
       commonjs({ extensions: ['.js', '.cjs', '.jsx', '.cjsx'] }),
       json(),
